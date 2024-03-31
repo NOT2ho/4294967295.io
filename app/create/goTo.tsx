@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 
-export default function useGoTo() {
+export default function goTo() {
 
     redirect('./read2')
 

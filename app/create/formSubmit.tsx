@@ -1,18 +1,18 @@
 'use server'
-import useGoTo from "./useGoTo";
-import query from "../lib/db";
+import { redirect } from 'next/navigation'
+import pool from "../lib/db";
 
 export async function FormSubmit(formData: FormData) {
-    const goTo = useGoTo();
-    console.log(formData.get('body'))
-    let body = formData.get('body')
-    const sql = `INSERT INTO memo (body) VALUES ("${body}")`
-    await query(sql, function (err: any, results: any, field: any) {
-        if (err) throw err;
-        else {
-            console.log('Updated ' + results.affectedRows + ' row(s).')
-        }
 
-        goTo;
-    })
+    console.log(formData.get('body'))
+    const param = formData.get('body')
+    const sql = 'INSERT INTO memo (body) VALUES ("?")'
+    try {
+        const result = await pool.query(sql, [param])
+        console.log(result)
+    } catch (err) {
+        console.log(err)
+    }
+
+    redirect('./read2')
 }
