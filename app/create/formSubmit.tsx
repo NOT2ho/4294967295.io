@@ -2,8 +2,8 @@
 import useGoTo from "./useGoTo";
 import query from "../lib/db";
 
-export async function formSubmit(formData: FormData) {
-
+export async function FormSubmit(formData: FormData) {
+    const goTo = useGoTo();
     console.log(formData.get('body'))
     let body = formData.get('body')
     const sql = `INSERT INTO memo (body) VALUES ("${body}")`
@@ -13,7 +13,6 @@ export async function formSubmit(formData: FormData) {
             console.log('Updated ' + results.affectedRows + ' row(s).')
         }
 
-
+        goTo;
     })
-
 }

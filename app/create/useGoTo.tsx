@@ -1,11 +1,7 @@
-'use cloe'
+import { redirect } from 'next/navigation'
 
-import { useRouter } from 'next/navigation'
+export default function useGoTo() {
 
-export default function useGoTo(props: any) {
-    const router = useRouter();
-
-    router.refresh()
-    router.push('/read2')
+    redirect('./read2')
 
 }
