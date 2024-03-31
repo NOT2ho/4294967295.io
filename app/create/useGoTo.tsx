@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 
-export default function useGoTo(props) {
+export default function useGoTo(props: any) {
     const router = useRouter();
 
     router.refresh()
