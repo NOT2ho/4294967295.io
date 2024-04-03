@@ -1,10 +1,10 @@
 import { createPool } from 'mysql2'
 
 const pool = createPool({
-    host: '4294967295.io',
-    user: 'xor2ho',
+    host: 'my5701.gabiadb.com',
+    user: 'not2ho',
     password: 'whatislove1024',
-    database: 'xor2ho',
+    database: 'mydb',
     port: 3306,
 })
 
