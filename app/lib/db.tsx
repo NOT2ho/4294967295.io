@@ -8,11 +8,11 @@ const pool = createPool({
     port: 3306,
 })
 
-pool.getConnection((err, conn) => {
+/*pool.getConnection((err, conn) => {
     if (err) console.log('Error connecting to db...')
     else console.log('Connected to db...!')
     conn.release()
-})
+})*/
 
 export default pool.promise()
 
