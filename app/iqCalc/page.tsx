@@ -1,13 +1,18 @@
 let ip: any
 let pf: any
+import dns from "node:dns";
+
+dns.setDefaultResultOrder("ipv4first");
+import { headers } from 'next/headers'
 
 export default async function iqCalc() {
 
     async function ipconfig() {
-        const ipData = await fetch('https://geolocation-db.com/json/');
-        const locationIp = await ipData.json();
-        //   console.log(locationIp.IPv4);
-        return (locationIp.IPv4)
+        {
+            const header = headers()
+            const ip = (header.get('fly-client-ip') ?? '127.0.0.1').split(',')[0]
+            return (ip)
+        }
     }
 
 
@@ -28,8 +33,8 @@ export default async function iqCalc() {
         let pp = distribution.cdf(ipNum)
 
 
-        //  console.log(iq)
-        //  console.log(pp)
+        console.log(iq)
+        console.log(pp)
 
         function yourIQ() {
             iq = 1 - pp
