@@ -1,23 +1,24 @@
-let ip: any
-let pf: any
-import dns from "node:dns";
-
-dns.setDefaultResultOrder("ipv4first");
+//let ip: any
+//let pf: any
 import { headers } from 'next/headers'
+import { forwardRef, Suspense } from "react";
 
-export default async function iqCalc() {
+function ipconfig() {
+    const FALLBACK_IP_ADDRESS = '0.0.0.0'
+    const forwardedFor = headers().get('x-forwarded-for')
 
-    async function ipconfig() {
-        {
-            const header = headers()
-            const ip = (header.get('fly-client-ip') ?? '127.0.0.1').split(',')[0]
-            return (ip)
-        }
+    if (forwardedFor) {
+        console.log(forwardedFor)
+        return forwardedFor.split(',')[0] ?? FALLBACK_IP_ADDRESS
     }
 
+    return headers().get('x-real-ip') ?? FALLBACK_IP_ADDRESS
+}
+console.log(ipconfig())
 
+export default async function iqCalc() {
     async function normalDtn() {
-        ip = await ipconfig()
+        const ip = ipconfig()
         const arr = ip.split('.')
 
         const ipNumStr = parseInt(arr[0]) + parseInt(arr[1]) + parseInt(arr[2]) + parseInt(arr[3])
@@ -45,15 +46,19 @@ export default async function iqCalc() {
             return (iq)
         }
         const dis = gaussian(100, 512);
-        pf = dis.ppf(yourIQ())
+        const pf = dis.ppf(yourIQ())
         //   console.log(pf)
         // let iq2 = yourIQ() * 100
         //    console.log(yourIQ() * 100)
 
+        return pf
+
     }
-    await normalDtn()
 
-    return (`당신의 ip는 ${ip}이며 이를 통해 추정한 당신의 IQ는 ${pf}입니다.`)
+    return (
 
+        `당신의 ip는 ${ipconfig()}이며 이를 통해 추정한 당신의 IQ는 ${await normalDtn()}입니다.`
+
+    )
 
 }
