@@ -15,19 +15,14 @@ export default async function iqCalc() {
         ip = await ipconfig()
         const arr = ip.split('.')
 
-        const ipNumStr = parseInt(arr[0]) * 1000000000 + parseInt(arr[1]) * 1000000 + parseInt(arr[2]) * 1000 + parseInt(arr[3])
+        const ipNumStr = parseInt(arr[0]) + parseInt(arr[1]) + parseInt(arr[2]) + parseInt(arr[3])
         let ipNum = Number(ipNumStr);
-        if (ipNum < 9255255255)
-            ipNum = ipNum
-        else if (9255255255 <= ipNum && ipNum <= 99255255255)
-            ipNum = ipNum / 50
-        else ipNum = ipNum / 500
 
         //   console.log(ipNum)
-        let sigma = 38532449364.348724 * 38532449364.348724
+        let sigma = 203.69461619698555 * 203.69461619698555
 
         let gaussian = require('gaussian');
-        let distribution = gaussian(54706378520.7907, sigma);
+        let distribution = gaussian(549.9299763965381, sigma);
         let iq = distribution.pdf(ipNum)
         //  let pp = distribution.cdf(ipNum)
         let pp = distribution.cdf(ipNum)
@@ -37,18 +32,15 @@ export default async function iqCalc() {
         //  console.log(pp)
 
         function yourIQ() {
-            iq = Math.abs((pp - 0.9999999999999999)) * 100
-            if (iq > 1)
-                iq = 1
-            else if (iq < 0)
-                iq = 0
-            else
-                iq = iq
+            iq = 1 - pp
+            //if (iq > 1)
+            //     iq = 1
+            // else
+            //    iq = iq
             return (iq)
         }
-        const dis = gaussian(100, 0.24);
+        const dis = gaussian(100, 512);
         pf = dis.ppf(yourIQ())
-
         //   console.log(pf)
         // let iq2 = yourIQ() * 100
         //    console.log(yourIQ() * 100)
