@@ -1,8 +1,5 @@
-import { redirect } from 'next/navigation'
-
-export let ip: any
-export let pf: any
-export let iq2: any
+let ip: any
+let pf: any
 
 export default async function iqCalc() {
 
@@ -44,7 +41,7 @@ export default async function iqCalc() {
         const dis = gaussian(100, 24);
         pf = dis.ppf(yourIQ())
         //   console.log(pf)
-        iq2 = yourIQ() * 100
+        // let iq2 = yourIQ() * 100
         //    console.log(yourIQ() * 100)
 
     }
