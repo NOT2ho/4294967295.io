@@ -1,5 +1,6 @@
 //let ip: any
 //let pf: any
+"use server"
 import { headers } from 'next/headers'
 
 function ipconfig() {
