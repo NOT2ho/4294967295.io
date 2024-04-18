@@ -29,7 +29,7 @@ export default async function iqCalc() {
         //  console.log(pp)
 
         function yourIQ() {
-            iq = Math.abs((pp - 0.99999)) * 100
+            iq = Math.abs((pp - 0.9999999999999999)) * 100
             if (iq > 1)
                 iq = iq / 10
             else if (iq < 0)
@@ -40,6 +40,9 @@ export default async function iqCalc() {
         }
         const dis = gaussian(100, 24);
         pf = dis.ppf(yourIQ())
+        if (pf > 150)
+            pf / 10
+
         //   console.log(pf)
         // let iq2 = yourIQ() * 100
         //    console.log(yourIQ() * 100)
