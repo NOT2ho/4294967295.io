@@ -3,22 +3,22 @@
 "use server"
 import { headers } from 'next/headers'
 
-function ipconfig() {
+async function ipconfig() {
     const FALLBACK_IP_ADDRESS = '0.0.0.0'
     const forwardedFor = headers().get('x-forwarded-for')
 
     if (forwardedFor) {
-        console.log(forwardedFor)
+        //console.log(forwardedFor)
         return forwardedFor.split(',')[0] ?? FALLBACK_IP_ADDRESS
     }
 
     return headers().get('x-real-ip') ?? FALLBACK_IP_ADDRESS
 }
-console.log(ipconfig())
+//console.log(ipconfig())
 
 export default async function iqCalc() {
     async function normalDtn() {
-        const ip = ipconfig()
+        const ip = await ipconfig()
         const arr = ip.split('.')
 
         const ipNumStr = parseInt(arr[0]) + parseInt(arr[1]) + parseInt(arr[2]) + parseInt(arr[3])
@@ -57,7 +57,7 @@ export default async function iqCalc() {
 
     return (
 
-        `당신의 ip는 ${ipconfig()}이며 이를 통해 추정한 당신의 IQ는 ${await normalDtn()}입니다.`
+        `당신의 ip는 ${await ipconfig()}이며 이를 통해 추정한 당신의 IQ는 ${await normalDtn()}입니다.`
 
     )
 
