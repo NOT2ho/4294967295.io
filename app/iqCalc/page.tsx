@@ -20,8 +20,8 @@ export default async function iqCalc() {
         if (ipNum < 9255255255)
             ipNum = ipNum
         else if (9255255255 <= ipNum && ipNum <= 99255255255)
-            ipNum = ipNum / 10
-        else ipNum = ipNum / 100
+            ipNum = ipNum / 50
+        else ipNum = ipNum / 500
 
         //   console.log(ipNum)
         let sigma = 38532449364.348724 * 38532449364.348724
