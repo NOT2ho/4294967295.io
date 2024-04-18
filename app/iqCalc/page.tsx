@@ -1,7 +1,6 @@
 //let ip: any
 //let pf: any
 import { headers } from 'next/headers'
-import { forwardRef, Suspense } from "react";
 
 function ipconfig() {
     const FALLBACK_IP_ADDRESS = '0.0.0.0'
