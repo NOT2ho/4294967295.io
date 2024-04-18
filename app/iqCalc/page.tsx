@@ -17,6 +17,11 @@ export default async function iqCalc() {
 
         const ipNumStr = parseInt(arr[0]) * 1000000000 + parseInt(arr[1]) * 1000000 + parseInt(arr[2]) * 1000 + parseInt(arr[3])
         let ipNum = Number(ipNumStr);
+        if (ipNum < 9255255255)
+            ipNum * 100
+        else if (9255255255 <= ipNum && ipNum <= 99255255255)
+            ipNum * 10
+        else ipNum = ipNum
 
         //   console.log(ipNum)
         let sigma = 38532449364.348724 * 38532449364.348724
@@ -24,24 +29,25 @@ export default async function iqCalc() {
         let gaussian = require('gaussian');
         let distribution = gaussian(54706378520.7907, sigma);
         let iq = distribution.pdf(ipNum)
+        //  let pp = distribution.cdf(ipNum)
         let pp = distribution.cdf(ipNum)
+
+
         //  console.log(iq)
         //  console.log(pp)
 
         function yourIQ() {
             iq = Math.abs((pp - 0.9999999999999999)) * 100
             if (iq > 1)
-                iq = iq / 10
+                iq = 1
             else if (iq < 0)
-                iq = iq
+                iq = 0
             else
                 iq = iq
             return (iq)
         }
-        const dis = gaussian(100, 24);
+        const dis = gaussian(100, 0.24);
         pf = dis.ppf(yourIQ())
-        if (pf > 150)
-            pf / 10
 
         //   console.log(pf)
         // let iq2 = yourIQ() * 100
