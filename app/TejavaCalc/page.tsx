@@ -2,7 +2,6 @@
 "use client"
 import React from 'react'
 import { useFormStatus } from 'react-dom'
-import { redirect } from 'next/navigation'
 
 
 export default function TejavaCalc() {
@@ -18,19 +17,21 @@ export default function TejavaCalc() {
         //
 
     )
+    function Header(props: any) {
+        return <h1>Develop. Preview. Ship.</h1>;
+    }
 }
 
 
 
 
-export let die: string
 function FormSubmit(formData: FormData) {
 
     const param = Number(formData.get('body'))
-    const numDie = 0.25 * param / 0.55 * 1000
-    die = numDie.toString();
+    const die = 0.25 * param / 0.55 * 1000
 
-    redirect('./death')
-
+    return <p>
+        당신은 데자와를 {die}캔 먹으면 0.5의 확률로 죽습니다. 주의하도록
+    </p>
 
 }
