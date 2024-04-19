@@ -23,12 +23,12 @@ export default function TejavaCalc() {
 
 
 
-export let die
-function FormSubmit(formData) {
+export let die: string
+function FormSubmit(formData: FormData) {
 
     const param = Number(formData.get('body'))
-    die = 0.25 * param / 0.55 * 1000
-
+    const numDie = 0.25 * param / 0.55 * 1000
+    die = numDie.toString();
 
     redirect('./death')
 
