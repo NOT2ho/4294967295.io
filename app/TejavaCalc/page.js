@@ -23,8 +23,8 @@ export default function TejavaCalc() {
 
 
 
-export let die: any
-function FormSubmit(formData: FormData) {
+export let die
+function FormSubmit(formData) {
 
     const param = Number(formData.get('body'))
     die = 0.25 * param / 0.55 * 1000
