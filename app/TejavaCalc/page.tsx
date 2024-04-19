@@ -6,8 +6,6 @@ import { redirect } from 'next/navigation'
 
 
 export default function TejavaCalc() {
-
-
     const { pending } = useFormStatus()
     return (
 
@@ -26,7 +24,7 @@ export default function TejavaCalc() {
 
 
 export let die: any
-export function FormSubmit(formData: FormData) {
+function FormSubmit(formData: FormData) {
 
     const param = Number(formData.get('body'))
     die = 0.25 * param / 0.55 * 1000
