@@ -1,5 +1,5 @@
 "use client"
-import { die } from "../TejavaCalc/page.tsx"
+import { die } from "../TejavaCalc/page"
 
 export default function Death() {
 

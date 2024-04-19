@@ -17,7 +17,7 @@ export default function TejavaCalc() {
             </p>
             <p><input type="submit" value="이상한거 쓰면 NaN 나옴" disabled={pending} /></p>
         </form >
-
+        //
 
     )
 }
