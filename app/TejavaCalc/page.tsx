@@ -17,9 +17,6 @@ export default function TejavaCalc() {
         //
 
     )
-    function Header(props: any) {
-        return <h1>Develop. Preview. Ship.</h1>;
-    }
 }
 
 
