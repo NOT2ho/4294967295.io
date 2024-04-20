@@ -1,9 +1,9 @@
 import { createPool } from 'mysql2'
 
 const pool = createPool({
-    host: 'my5701.gabiadb.com',
-    user: 'not2ho',
-    password: 'whatislove1024',
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
     database: 'mydb',
     port: 3306,
 })
