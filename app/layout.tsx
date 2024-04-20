@@ -7,7 +7,8 @@ export default async function RootLayout({ children }: PropsWithChildren) {
   return (<html>
     <body> <Link href="/create">의견개진란</Link> <br></br>
       <Link href="/iqCalc">iq 추적기</Link> <br></br>
-      <Link href="/TejavaCalc">데자와 계산기</Link>
+      <Link href="/TejavaCalc">데자와 계산기</Link><br></br>
+      <Link href="/BpmCalc">BPM-kcal 소모시간 계산기</Link>
 
       <br></br><h1>
         {children}
