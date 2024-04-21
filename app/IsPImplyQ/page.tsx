@@ -14,12 +14,22 @@ export default function IsPImplyQ() {
         let i = String(formData.get('body'))
 
         let str = ""
+        let isBr = 0;
 
-
-        for (let j = 0; j < i.length; j++) {
-
+        for (let j = 0; j < i.length - 1; j++) {
 
             let isP = Number(i.charCodeAt(j))
+            if (isP % 3 != 0) {
+                str = str + "("
+                isBr = isBr + 1
+            }
+
+
+            /* if (isP % 3 == 2 || isP % 3 == 1) {
+                 str = str + "("
+                 isBr = isBr + 1
+             }
+*/
             if (isP % 6 == 0) {
                 str = str + "¬P"
             }
@@ -34,11 +44,8 @@ export default function IsPImplyQ() {
             else
                 str = str + "F"
 
-
-
-
-
             let arr = Number(i.charCodeAt(j))
+
             if (arr % 6 == 0) {
                 str = str + "≡"
             }
@@ -53,15 +60,67 @@ export default function IsPImplyQ() {
             else
                 str = str + "⊂"
 
+            if (isP % 6 == 0) {
+                str = str + "¬R"
+            }
+            else if (isP % 6 == 1)
+                str = str + "¬S"
+            else if (isP % 6 == 2)
+                str = str + "R"
+            else if (isP % 6 == 4)
+                str = str + "S"
+            else if (isP % 6 == 5)
+                str = str + "T"
+            else
+                str = str + "F"
+
+            if (isBr > 0 && arr % 3 != 1) {
+                str = str + ")"
+                isBr = isBr - 1
+            }
+
+            if (true) {
+                if (arr % 6 == 0) {
+                    str = str + "≡"
+                }
+                else if (arr % 6 == 1)
+                    str = str + "→"
+                else if (arr % 6 == 2)
+                    str = str + "∧"
+                else if (arr % 6 == 4)
+                    str = str + "∨"
+                else if (arr % 6 == 5)
+                    str = str + "⊕"
+                else
+                    str = str + "⊂"
+
+            }
+
+
 
 
         }
+        /*
+        let arr = Number(i.charCodeAt(i.length - 1))
 
+        if (arr % 6 == 0) {
+            str = str + "≡"
+        }
+        else if (arr % 6 == 1)
+            str = str + "→"
+        else if (arr % 6 == 2)
+            str = str + "∧"
+        else if (arr % 6 == 4)
+            str = str + "∨"
+        else if (arr % 6 == 5)
+            str = str + "⊕"
+        else
+            str = str + "⊂"
+*/
 
         let isQ = Number(i.length)
-        if (isQ % 6 == 0) {
+        if (isQ % 6 == 0)
             str = str + "¬P"
-        }
         else if (isQ % 6 == 1)
             str = str + "P"
         else if (isQ % 6 == 2)
@@ -72,6 +131,15 @@ export default function IsPImplyQ() {
             str = str + "T"
         else
             str = str + "F"
+
+
+        if (isBr > 0) {
+            for (let i = 0; i < isBr + 1; i++) {
+                str = str + ")"
+                isBr = isBr - 1
+            }
+        }
+
 
         setVal(str)
         setHide(true)
