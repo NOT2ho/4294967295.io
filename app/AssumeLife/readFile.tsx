@@ -5,7 +5,7 @@ let die = 0
 export default async function readFile(Number: number) {
 
 
-    readXlsxFile("/AssumeLife/life.xlsx").then((rows: any) => {
+    readXlsxFile("/app/AssumeLife/life.xlsx").then((rows: any) => {
         console.log(rows);
 
         for (let i = 0; rows.flat(0)[i][0] != Number; i++) {
