@@ -4,7 +4,8 @@ import React from "react";
 export default async function Home() {
     return (
         <>
-            <img src="/101047.png"></img>
+            <img src="/nodejs.gif"></img>
         </>
     )
 }
+``

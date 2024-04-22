@@ -5,7 +5,8 @@ import Link from 'next/link'
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   return (<html>
-    <body> <Link href="/create">의견개진란</Link> <br></br>
+    <body> <Link href="/">빙글빙글 도는 nodejs쟝 보기</Link> <br></br>
+      <Link href="/create">의견개진란</Link> <br></br>
       <Link href="/iqCalc">iq 추적기</Link> <br></br>
       <Link href="/TejavaCalc">데자와 계산기</Link><br></br>
       <Link href="/BpmCalc">BPM-kcal 소모시간 계산기</Link><br></br>
