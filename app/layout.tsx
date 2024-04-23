@@ -5,18 +5,11 @@ import Link from 'next/link'
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   return (<html>
-    <body> <Link href="/">빙글빙글 도는 nodejs쟝 보기</Link> <br></br>
-      <Link href="/create">의견개진란</Link> <br></br>
-      <Link href="/iqCalc">iq 추적기</Link> <br></br>
-      <Link href="/TejavaCalc">데자와 계산기</Link><br></br>
-      <Link href="/BpmCalc">BPM-kcal 소모시간 계산기</Link><br></br>
-      <Link href="/CatMeow">야옹 생성기</Link><br></br>
-      <Link href="IsPImplyQ">명제 생성기</Link><br></br>
-      <Link href="AssumeLife">잔여수명 측정기</Link>
-
-      <br></br><h1>
-        {children}
-        <br></br></h1>
+    <body>
+      <br></br>
+      <Link href="/">빙글빙글 도는 nodejs쟝 보기</Link> <br></br>
+      {children}
+      <br></br>
     </body></html>)
 }
 export const metadata = {
