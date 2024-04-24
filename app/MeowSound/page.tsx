@@ -1,14 +1,12 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 //import FormSubmit from './FormSubmit'
 import { useFormStatus } from 'react-dom'
 
 
-export default function CatMeow() {
-    let stt = ["야", "왜", "웨", "와", "애", "이"]
-    let end = ["옹", "웅", "용"]
-    let mid = ["오", "우", "요", "으", "유", "아", "이", "애", "얘", "에"]
+export default function MeowSound() {
+
 
     let sttEng = ["ya", "ywe", "yweo", "wa", "ae", "i"]
     let endEng = ["ong", "ung", "yong"]
@@ -25,58 +23,47 @@ export default function CatMeow() {
         return Math.floor(Math.random() * (9 - 0))
     }
 
-    console.log(stt[getRandomInt()])
-    console.log(mid[getRandomInt2()])
-    console.log(end[getRandomInt3()])
-
 
     const { pending, data } = useFormStatus()
-    const [val, setVal] = React.useState("");
+
     const [val2, setVal2] = React.useState("");
     const [hide, setHide] = React.useState(false);
-    const [i, setI] = React.useState(0);
 
     const FormSubmit = (formData: FormData) => {
 
         const i = Number(formData.get('int'))
-
-
-        let str = stt[getRandomInt()]
-        for (let j = 0; j < i; j++) {
-            str = str + mid[getRandomInt2()]
-        }
-        str = str + end[getRandomInt3()]
-
         let strEng = sttEng[getRandomInt()]
-        for (let j = 0; j < i; j++) {
-            str = str + midEng[getRandomInt2()]
+        if (i < 30) {
+
+
+            for (let j = 0; j < i; j++) {
+                strEng = strEng + midEng[getRandomInt2()]
+            }
+            strEng = strEng + endEng[getRandomInt3()]
+
         }
-        str = str + endEng[getRandomInt3()]
-
-
-
-        setVal(str)
+        else
+            strEng = "Keun su an doe"
         setVal2(strEng)
         setHide(true)
-        increseI()
-    }
-    /*
-    const options = {
-        method: 'POST',
-        headers: {
-            'xi-api-key': 'b44e91fb0eabbeb947f70ed906fa11e9',
-            'Content-Type': 'application/json'
-        },
-        body: `{"text":${val2},"model_id":"Turbo v2","voice_settings":{"stability":1,"similarity_boost":1,"style":2,"use_speaker_boost":true}}`
-    };
 
-    fetch('https://api.elevenlabs.io/v1/text-to-speech/Xb7hH8MSUJpSbSDYk0k2?output_format=mp3_44100_32', options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
-
-    */
-    const increseI = () => {
+        /*
+        const options = {
+            method: 'POST',
+            headers: {
+                'xi-api-key': 'b44e91fb0eabbeb947f70ed906fa11e9',
+                'Content-Type': 'application/json'
+            },
+            body: `{"text":${val2},"model_id":"Turbo v2","voice_settings":{"stability":1,"similarity_boost":1,"style":2,"use_speaker_boost":true}}`
+        };
+    
+        fetch('https://api.elevenlabs.io/v1/text-to-speech/Xb7hH8MSUJpSbSDYk0k2?output_format=mp3_44100_32', options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
+    
+        */
+        console.log("미미")
         const voiceId = "Xb7hH8MSUJpSbSDYk0k2"; // replace with your voice_id
         const model = 'eleven_turbo_v2';
         const wsUrl = `wss://api.elevenlabs.io/v1/text-to-speech/${voiceId}/stream-input?model_id=${model}`;
@@ -150,6 +137,7 @@ export default function CatMeow() {
 
 
 
+
     }
 
 
@@ -159,8 +147,8 @@ export default function CatMeow() {
             <p>
                 <textarea name="int" placeholder="int"></textarea>
             </p>
-            <p><input type="submit" value="긴 울음소리 만들면 고양이가 아파합니다." disabled={pending} />
-            </p>{hide ? <p>{val}</p> : <p></p>}
+            <p><input type="submit" value="큰 숫자 넣지 마세요." disabled={pending} />
+            </p>{hide ? <p>음성이 재생되지 않는다면 사용자 문제입니다.(진짜로!)</p> : <p></p>}
         </form >
     )
 

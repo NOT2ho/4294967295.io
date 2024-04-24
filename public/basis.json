@@ -12,5 +12,6 @@
     "hairColor": "green",
     "ownedVocaloid": "UNI",
     "species": "human",
-    "homeTown": "Coast"
+    "homeTown": "Coast",
+    "isAlive": "true"
 }
