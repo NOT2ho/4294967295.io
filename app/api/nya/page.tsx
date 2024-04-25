@@ -39,6 +39,4 @@ export default async function nya(
     const id = await Random(Number(data))
     res.status(200).json(id)
 
-
-    return <></>
 }

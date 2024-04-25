@@ -34,5 +34,4 @@ export default async function mid(
     console.log(await fetchNya)
     const data = fetch11(await fetchNya())
     res.status(200).json(data)
-    return <></>
 };

@@ -49,5 +49,5 @@ export default async function endNya() {
 
     };
     await createAudioStreamFromText(await getData())
-    return <></>
+
 }
