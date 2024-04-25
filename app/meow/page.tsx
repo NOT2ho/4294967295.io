@@ -1,8 +1,7 @@
-"use client"
 import { ElevenLabsClient } from "elevenlabs";
 import * as dotenv from "dotenv";
 import { select } from "./select";
-
+import pool from "../lib/db";
 export default async function meow() {
 
 
@@ -34,53 +33,18 @@ export default async function meow() {
 
         const content = Buffer.concat(chunks);
         return content;
+
     };
 
+    /************************************************************* *
+    try {
+        const sql = 'INSERT INTO nya (body) VALUES (?)';
+        const result = await pool.query(sql, [await createAudioStreamFromText(await select())]);
+        console.log(result);
 
-
-    await createAudioStreamFromText(await select())
-
+    } catch (err) {
+        console.log(err);
+    }
+******************************************************************** */
+    return await createAudioStreamFromText(await select())
 }
-
-
-
-
-
-
-
-/************************************************
-import { ElevenLabsClient } from "elevenlabs";
-import * as dotenv from "dotenv";
-import { select } from "./select";
-
-
-dotenv.config();
-
-const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
-
-if (!ELEVENLABS_API_KEY) {
-    throw new Error("Missing ELEVENLABS_API_KEY in environment variables");
-}
-
-export default async function meow() {
-    const client = new ElevenLabsClient({
-        apiKey: ELEVENLABS_API_KEY,
-    });
-    const audioStream = await client.generate({
-        stream: true,
-        voice: "Bella",
-        text: await select(),
-        model_id: "eleven_multilingual_v2"
-    })
-
-
-    return (<p>
-        <body>
-            <button data-playing="false" role="switch" aria-checked="false">
-                <span>{await select()}</span>
-            </button>
-            <audio src={await select()}></audio>
-        </body></p>
-    )
-}
-**************************************************/
