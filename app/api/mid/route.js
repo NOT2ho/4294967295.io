@@ -1,8 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function mid(
-    req: any,
-    res: any) {
+    req,
+    res) {
 
 
     async function fetchNya() {
@@ -14,7 +13,7 @@ export default async function mid(
         return res.json()
     }
 
-    async function fetch11(string: string) {
+    async function fetch11(string) {
 
         const options = {
             method: 'POST',

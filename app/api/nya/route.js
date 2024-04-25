@@ -1,13 +1,13 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+
 
 export default async function nya(
-    req: any,
-    res: any
+    req,
+    res
 ) {
     const data = req.body
 
 
-    const Random: any = async (num: Number) => {
+    const Random = async (num) => {
         const i = Number(num)
 
 
@@ -15,7 +15,7 @@ export default async function nya(
         let endEng = ["ong", "ung", "yong"]
         let midEng = ["o", "u", "yo", "eu", "yu", "a", "i", "ae", "yea", "e"]
 
-        const getRandomInt = (Max: Number) => {
+        const getRandomInt = (Max) => {
             return Math.floor(+Math.random() * +Max)
         }
 
@@ -38,5 +38,6 @@ export default async function nya(
 
     const id = await Random(Number(data))
     res.status(200).json(id)
+
 
 }
