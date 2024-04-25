@@ -1,26 +1,21 @@
-"use client"
-import React, { useEffect } from 'react'
-import { useState } from 'react'
-import { useFormStatus } from 'react-dom'
-import { FormEvent } from 'react'
+'use client'
+import React from 'react'
+import { FormSubmit } from '../create/formSubmit'
 
-export default function MeowSound() {
+export default function Create() {
 
-    async function onSubmit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault()
-
-        const formData = new FormData(event.currentTarget)
-        const response = await fetch('https://4294967295.io/meow', {
-            method: 'POST',
-            body: formData,
-        })
-    }
 
     return (
-        <form onSubmit={onSubmit}>
-            <input type="text" name="name" />
-            <button type="submit">Submit</button>
-        </form>
-    )
+        <form action={FormSubmit} >
+            <p>
+                <textarea name="int" placeholder="int, n<33"></textarea>
+            </p>
+            <p><input type="submit" value="이 기능은 유료이며 돈은 제가 내니 안심하십시오." /></p>
+        </form >
 
+    )
 }
+
+
+
+
