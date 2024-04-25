@@ -1,4 +1,4 @@
-
+"use client"
 import { ElevenLabsClient } from "elevenlabs";
 import * as dotenv from "dotenv";
 import { select } from "./select";
