@@ -1,5 +1,6 @@
 "use server"
 import pool from "../lib/db";
+
 export async function select() {
 
     try {
@@ -13,6 +14,6 @@ export async function select() {
         return res;
     } catch (err) {
         console.log(err);
-
+        return "";
     }
 }
