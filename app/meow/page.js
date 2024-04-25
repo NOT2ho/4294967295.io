@@ -51,7 +51,6 @@ export default async function handler(
 
     }
 
-    console.log(await fetch11(id))
     const data = fetch11(id)
     res.status(200).json(data)
 };
