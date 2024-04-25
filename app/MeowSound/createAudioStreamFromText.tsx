@@ -13,7 +13,7 @@ export default async function endNya() {
         const options = {
             method: 'POST'
         }
-        const res = await fetch('https://4294967295.io/api', options)
+        const res = await fetch('https://4294967295.io/meow', options)
         const data = await res.json()
         const nya = JSON.parse(data)
         const notPromiseNya = await nya

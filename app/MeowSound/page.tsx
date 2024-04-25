@@ -10,7 +10,7 @@ export default function MeowSound() {
         event.preventDefault()
 
         const formData = new FormData(event.currentTarget)
-        const response = await fetch('https://4294967295.io/api/nya', {
+        const response = await fetch('https://4294967295.io/meow', {
             method: 'POST',
             body: formData,
         })
