@@ -1,7 +1,7 @@
 
 import { ElevenLabsClient } from "elevenlabs";
 import * as dotenv from "dotenv";
-import { select } from "../MeowSound/select";
+import { select } from "./select";
 
 
 

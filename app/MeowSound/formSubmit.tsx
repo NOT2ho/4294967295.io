@@ -43,20 +43,5 @@ export async function FormSubmit(formData: FormData) {
         console.log(err);
     }
 
-    redirect('./meow')
-}
-
-export async function select() {
-
-
-    try {
-        const sql = 'SELECT * FROM `nya`';
-
-        const [rows, fields] = await pool.query(sql);
-
-        console.log(rows);
-        console.log(fields);
-    } catch (err) {
-        console.log(err);
-    }
+    redirect('/meow')
 }
