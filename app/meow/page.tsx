@@ -46,5 +46,18 @@ export default async function meow() {
         console.log(err);
     }
 ******************************************************************** */
-    return await createAudioStreamFromText(await select())
+    const stream = require('stream');
+    const Speaker = require('speaker');
+
+    let speaker = new Speaker();
+
+    function playAudioFromBuffer(fileContents: any) {
+        let bufferStream = new stream.PassThrough();
+        bufferStream.end(fileContents);
+        bufferStream.pipe(speaker);
+    }
+
+    return playAudioFromBuffer(await createAudioStreamFromText(await select()))
+
+
 }
