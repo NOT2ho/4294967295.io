@@ -34,5 +34,6 @@ const createAudioStreamFromText = async (
 };
 
 export default async function meow() {
+    console.log(await select())
     await createAudioStreamFromText(await select())
 }

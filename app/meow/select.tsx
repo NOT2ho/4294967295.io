@@ -4,7 +4,7 @@ import pool from "../lib/db";
 export async function select() {
 
     try {
-        const sql = `SELECT "body" FROM "nya" ORDER BY "id" DESC LIMIT 1`
+        const sql = `SELECT * FROM "nya" ORDER BY "id" DESC LIMIT 1`
 
         const [rows, fields] = await pool.query(sql);
 
