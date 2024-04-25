@@ -2,13 +2,13 @@ export default async function handler(
     req,
     res
 ) {
+    let sttEng = ["ya", "ywe", "yweo", "wa", "ae", "i", "mi"]
+    let endEng = ["ong", "ung", "yong"]
+    let midEng = ["o", "u", "yo", "eu", "yu", "a", "i", "ae", "yea", "e"]
+
     const Random = async (num) => {
         const i = Number(num)
 
-
-        let sttEng = ["ya", "ywe", "yweo", "wa", "ae", "i", "mi"]
-        let endEng = ["ong", "ung", "yong"]
-        let midEng = ["o", "u", "yo", "eu", "yu", "a", "i", "ae", "yea", "e"]
 
         const getRandomInt = (Max) => {
             return Math.floor(+Math.random() * +Max)
