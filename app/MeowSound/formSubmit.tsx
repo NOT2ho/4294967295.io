@@ -40,11 +40,11 @@ export async function FormSubmit(formData: FormData) {
         const result = await pool.query(sql, [await Random(param)]);
         console.log(result);
 
-        redirect('/meow')
+
 
     } catch (err) {
         console.log(err);
     }
 
-
+    redirect('./meow')
 }
