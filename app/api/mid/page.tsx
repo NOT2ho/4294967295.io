@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function mid(
-    req: NextApiRequest,
-    res: NextApiResponse) {
+    req: any,
+    res: any) {
 
 
     async function fetchNya() {

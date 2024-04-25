@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function nya(
-    req: NextApiRequest,
-    res: NextApiResponse
+    req: any,
+    res: any
 ) {
     const data = req.body
 
