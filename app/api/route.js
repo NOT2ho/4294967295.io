@@ -1,5 +1,5 @@
 
-export default async function nya(
+export default async function POST(
     req,
     res
 ) {
