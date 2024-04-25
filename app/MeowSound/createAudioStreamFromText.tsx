@@ -10,8 +10,10 @@ export default async function endNya() {
     }
 
     async function getData() {
-
-        const res = await fetch('https://4294967295.io/api/mid')
+        const options = {
+            method: 'POST'
+        }
+        const res = await fetch('https://4294967295.io/api', options)
         const data = await res.json()
         const nya = JSON.parse(data)
         const notPromiseNya = await nya
@@ -48,6 +50,5 @@ export default async function endNya() {
         return content
 
     };
-    await createAudioStreamFromText(await getData())
-
+    return await createAudioStreamFromText(await getData())
 }
