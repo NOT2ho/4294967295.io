@@ -1,7 +1,7 @@
 "use server"
 import pool from "../lib/db";
 
-export async function select() {
+export async function select(nothing: null) {
 
     try {
         const sql = 'SELECT * FROM nya ORDER BY "id" DESC LIMIT 1'
@@ -17,3 +17,4 @@ export async function select() {
         return "";
     }
 }
+export const seleted = await select(null)
