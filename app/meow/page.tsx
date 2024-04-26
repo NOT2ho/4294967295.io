@@ -1,8 +1,8 @@
-window.AudioContext = window.AudioContext || window.webkitAudioContext
 import { ElevenLabsClient } from "elevenlabs";
 import * as dotenv from "dotenv";
 import { select } from "./select";
 import pool from "../lib/db";
+import { redirect } from "next/navigation";
 export default async function meow() {
 
 
@@ -36,6 +36,8 @@ export default async function meow() {
         return content;
 
     };
+    return await createAudioStreamFromText(await select())
+
 
     /************************************************************* *
     try {
@@ -61,19 +63,8 @@ export default async function meow() {
     }
 ******************************************************************** */
     //const arrayBufferToAudioBuffer = require('arraybuffer-to-audiobuffer')
-    const audioCtx = new AudioContext()
-    let ac = await createAudioStreamFromText(await select())
-    //let buffer = arrayBufferToAudioBuffer(ac, audioCtx)
-    //let audioSource = audioCtx.createBufferSource()
-    //audioSource.buffer = buffer
-    const audioBuffer = await audioCtx.decodeAudioData(ac);
-    //const audioElement = document.querySelector("audio");
-    const source = audioCtx.createBufferSource();
-    source.buffer = audioBuffer;
-    source.connect(audioCtx.destination);
-    source.start();
-
-    return (source.start())
 
 
 }
+
+redirect('./meowClient')
