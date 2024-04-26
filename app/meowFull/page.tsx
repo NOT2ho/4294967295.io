@@ -1,3 +1,4 @@
+"use client"
 import MeowClient from "../meowClient/page"
 
 export default function meowFull() {
