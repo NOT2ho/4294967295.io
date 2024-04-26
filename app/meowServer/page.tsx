@@ -39,8 +39,6 @@ export default async function meowServer(nothing: number) {
 
     };
     return (await createAudioStreamFromText(await select(0)))
+
 }
-
-MeowClient()
-
 
