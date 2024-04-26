@@ -3,7 +3,7 @@ import { ElevenLabsClient } from "elevenlabs";
 import * as dotenv from "dotenv";
 import { select } from "./select";
 
-export default async function meowServer(nothing: Number) {
+export default async function meowServer(nothing: any) {
 
 
     dotenv.config();
