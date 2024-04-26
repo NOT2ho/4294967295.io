@@ -2,8 +2,6 @@
 import { ElevenLabsClient } from "elevenlabs";
 import * as dotenv from "dotenv";
 import { select } from "./select";
-import { redirect } from "next/navigation";
-import MeowClient from "../meowClient/page";
 
 export default async function meowServer(nothing: number) {
 
