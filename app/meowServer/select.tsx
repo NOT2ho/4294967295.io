@@ -17,4 +17,3 @@ export async function select(nothing: null) {
         return "";
     }
 }
-export const seleted = await select(null)
