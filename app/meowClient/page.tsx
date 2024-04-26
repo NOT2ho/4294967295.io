@@ -14,5 +14,6 @@ export default async function meowClient() {
     source.buffer = audioBuffer;
     source.connect(audioCtx.destination);
     source.start();
+
 }
-return (source.start())
+
