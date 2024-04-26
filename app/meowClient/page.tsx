@@ -11,7 +11,8 @@ function MeowMeow() {
         (async () => {
             const meowServered = await meowServer(0)
             const audioCtx = new AudioContext()
-            const audioBuffer = await audioCtx.decodeAudioData(meowServered);
+            const meowServeredBuf = new Uint8Array(meowServered).buffer;
+            const audioBuffer = await audioCtx.decodeAudioData(meowServeredBuf);
             const source = audioCtx.createBufferSource();
             source.buffer = audioBuffer;
             source.connect(audioCtx.destination);
@@ -22,14 +23,14 @@ function MeowMeow() {
 
             /*return () => {
                 source.stop
-            }*/
+            }<button onClick={MeowMeow}>왜웅</button>*/
 
         })()
     }, [src])
 
     return (<>
         {src?.start()}
-        <button onClick={MeowMeow}>왜웅</button>
+
     </>)
 }
 
