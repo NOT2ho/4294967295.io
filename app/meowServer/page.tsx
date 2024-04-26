@@ -3,7 +3,7 @@ import { ElevenLabsClient } from "elevenlabs";
 import * as dotenv from "dotenv";
 import { select } from "./select";
 
-export default async function meowServer(nothing: number) {
+export default async function meowServer(nothing: Number) {
 
 
     dotenv.config();
@@ -39,4 +39,3 @@ export default async function meowServer(nothing: number) {
     return (await createAudioStreamFromText(await select(0)))
 
 }
-
