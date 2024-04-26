@@ -1,7 +1,6 @@
 import { ElevenLabsClient } from "elevenlabs";
 import * as dotenv from "dotenv";
 import { select } from "./select";
-import pool from "../lib/db";
 import { redirect } from "next/navigation";
 export default async function meow() {
 
@@ -67,4 +66,4 @@ export default async function meow() {
 
 }
 
-redirect('./meowClient')
+redirect('./midMeow')
