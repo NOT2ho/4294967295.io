@@ -12,6 +12,8 @@ export default function MeowClient() {
         source.buffer = audioBuffer;
         source.connect(audioCtx.destination);
         source.start()
+
     }
+    return (<p>야옹</p>)
 }
 

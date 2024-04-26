@@ -40,6 +40,6 @@ export async function FormSubmit(formData: FormData) {
     console.log(result);
 
 
-    redirect('./meowFull')
+    redirect('./meowClient')
 }
 
