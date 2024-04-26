@@ -5,7 +5,7 @@ import { select } from "./select";
 import { redirect } from "next/navigation";
 import MeowClient from "../meowClient/page";
 
-export default async function meowServer(nothing: null) {
+export default async function meowServer(nothing: number) {
 
 
     dotenv.config();
@@ -38,7 +38,7 @@ export default async function meowServer(nothing: null) {
         return content;
 
     };
-    return await createAudioStreamFromText(await select(null))
+    return await createAudioStreamFromText(await select(0))
 }
 
 MeowClient()
