@@ -14,6 +14,5 @@ export default function MeowClient() {
             source.start()
 
         })
-    return (<p>야옹</p>)
 }
 
