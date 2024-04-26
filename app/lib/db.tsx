@@ -3,7 +3,7 @@ import { createPool } from 'mysql2'
 const pool = createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
-    password: process.env.PASS,
+    password: process.env.DB_PASS,
     database: 'mydb',
     port: 3306,
 })
