@@ -4,16 +4,16 @@ import meowServer from '../meowServer/page';
 
 
 export default function MeowClient() {
+    return (
+        async () => {
+            const audioCtx = new AudioContext()
+            const audioBuffer = await audioCtx.decodeAudioData(await meowServer(0));
+            const source = audioCtx.createBufferSource();
+            source.buffer = audioBuffer;
+            source.connect(audioCtx.destination);
+            source.start()
 
-    async () => {
-        const audioCtx = new AudioContext()
-        const audioBuffer = await audioCtx.decodeAudioData(await meowServer(0));
-        const source = audioCtx.createBufferSource();
-        source.buffer = audioBuffer;
-        source.connect(audioCtx.destination);
-        source.start()
-
-    }
+        })
     return (<p>야옹</p>)
 }
 
