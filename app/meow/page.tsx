@@ -45,7 +45,7 @@ export default async function meow() {
     } catch (err) {
         console.log(err);
     }
-******************************************************************** */
+
     const stream = require('stream');
     const Speaker = require('speaker');
 
@@ -55,9 +55,24 @@ export default async function meow() {
         let bufferStream = new stream.PassThrough();
         bufferStream.end(fileContents);
         bufferStream.pipe(speaker);
-    }
 
-    return playAudioFromBuffer(await createAudioStreamFromText(await select()))
+       
+    }
+******************************************************************** */
+    //const arrayBufferToAudioBuffer = require('arraybuffer-to-audiobuffer')
+    const audioCtx = new AudioContext()
+    let ac = await createAudioStreamFromText(await select())
+    //let buffer = arrayBufferToAudioBuffer(ac, audioCtx)
+    //let audioSource = audioCtx.createBufferSource()
+    //audioSource.buffer = buffer
+    const audioBuffer = await audioCtx.decodeAudioData(ac);
+    //const audioElement = document.querySelector("audio");
+    const source = audioCtx.createBufferSource();
+    source.buffer = audioBuffer;
+    source.connect(audioCtx.destination);
+    source.start();
+
+    return (source.start())
 
 
 }

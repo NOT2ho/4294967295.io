@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "arraybuffer-to-audiobuffer": "^0.0.5",
     "command-exists": "^1.2.9",
     "dotenv": "^16.4.5",
     "elevenlabs": "^0.3.0",
