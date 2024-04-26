@@ -1,6 +1,7 @@
 'use server'
 import { redirect } from 'next/navigation'
 import pool from "../lib/db";
+import { select } from '../meowServer/select';
 
 export async function FormSubmit(formData: FormData) {
 
@@ -39,7 +40,7 @@ export async function FormSubmit(formData: FormData) {
     const result = await pool.query(sql, [await Random(param)]);
     console.log(result);
 
-
+    //select(0)
     redirect('./meowClient')
 }
 

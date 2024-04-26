@@ -5,7 +5,7 @@ import { select } from "./select";
 
 export default async function meowServer(nothing: any) {
 
-
+    const selected = await select()
     dotenv.config();
 
     const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
@@ -36,6 +36,6 @@ export default async function meowServer(nothing: any) {
         return content;
 
     };
-    return (await createAudioStreamFromText(await select(client)))
+    return (await createAudioStreamFromText(selected))
 
 }
