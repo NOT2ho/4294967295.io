@@ -1,43 +1,17 @@
-"use client"
-import { startTransition } from 'react';
-import meowServer from '../meowServer/notPage';
-import { useState, useEffect, useRef } from 'react';
+import ElevenLabsAudioNative from "./eleven";
 
-function MeowMeow() {
-    //  const myRef = useRef<HTMLAudioElement>(null);
-    const [src, setSrc] = useState<AudioBufferSourceNode>()
-
-    useEffect(() => {
-        (async () => {
-            const meowServered = await meowServer(0)
-            const audioCtx = new AudioContext()
-            const meowServeredBuf = new Uint8Array(meowServered).buffer;
-            const audioBuffer = await audioCtx.decodeAudioData(meowServeredBuf);
-            const source = audioCtx.createBufferSource();
-            source.buffer = audioBuffer;
-            source.connect(audioCtx.destination);
-            setSrc(source)
-            //source.start()
-
-            //myRef.current
-
-            /*return () => {
-                source.stop
-            }<button onClick={MeowMeow}>왜웅</button>*/
-
-        })()
-    }, [src])
-
-    return (<>
-        {src?.start()}
-
-    </>)
-}
-
-export default function MeowClient() {
-
+export default function Page() {
     return (
-        <MeowMeow></MeowMeow>
-    )
-}
+        <div>
+            <h1>
+                애오오오오오옹
+            </h1>
 
+            <ElevenLabsAudioNative publicUserId="7b255a2eb57cadc30fb58c8b845c1ab7ffc4be5a55c5db590a79b6026813f7c6" />
+
+            <p>
+                와웅
+            </p>
+        </div>
+    );
+}
