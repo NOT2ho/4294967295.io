@@ -7,6 +7,7 @@ export async function select() {
         const sql = 'SELECT * FROM nya ORDER BY id DESC LIMIT 1'
 
         const rows = await pool.query(sql);
+        console.log(Object.values(rows[0])[0]['body'])
         return Object.values(rows[0])[0]['body']
 
         console.log(Object.values(rows[0])[0]['body']);
