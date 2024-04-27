@@ -1,8 +1,18 @@
 "use client"
 
 import { select } from "../meowServer/select"
+import { useEffect } from "react";
 export default async function meow() {
-    const mySynth = window.speechSynthesis;
     const utterance = new SpeechSynthesisUtterance(await select());
-    mySynth.speak(utterance);
+
+    function MeowClient() {
+        useEffect(() => {
+            const mySynth = window.speechSynthesis;
+
+            mySynth.speak(utterance)
+
+        })
+
+    }
+    MeowClient()
 }
