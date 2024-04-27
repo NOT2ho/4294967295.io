@@ -1,3 +1,5 @@
+"use client"
+
 import { select } from "../meowServer/select"
 export default async function meow() {
     const mySynth = window.speechSynthesis;
