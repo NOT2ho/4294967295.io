@@ -1,34 +1,19 @@
 export default async function RegExCreate() {
-    const regex = /^t.?e+[^s-t]*/i
+    const regex = /(^4.t?e+[^s-t]*\W{2,9}l)O?|([4-9]([^6]|7){2}v)E?(\D{9}5$)/i
 
-    const genRandStr = (num: number) => {
-        const arr =["아니","근데","진짜","뭐냐"];
-        let res = '';
-        for (let i = 0; i < num; i++) {
-            res += arr[(Math.floor(Math.random() * arr.length))];
-        }
-        return res;
-      }
-
-
-    const getRandNum = () => {
-        const num = Math.floor(Math.random()*100)
-        return num;
-    }      
-    
-    const callGenRandStr = () => {
-        for  (let i=0; i<100; i++)
-        console.log(genRandStr(getRandNum()))
-    }
     const Create = () => {
         {
-            for (let i = 0; i < 10000; i++) {
-                const randStr = String.fromCharCode(Math.random() * 26 + 65) + String.fromCharCode(Math.random() * 52 + 75) + String.fromCharCode(Math.random() * 52 + 65) + " " + String.fromCharCode(Math.random() * 26 + 65) + String.fromCharCode(Math.random() * 52 + 65) + String.fromCharCode(Math.random() * 52 + 65) + " " + String.fromCharCode(Math.random() * 26 + 65) + String.fromCharCode(Math.random() * 52 + 65) + String.fromCharCode(Math.random() * 52 + 65)
-                //const randStr = String.fromCharCode(Math.random() * 52 + 65) + String.fromCharCode(Math.random() * 11172 + 0xAC00) + String.fromCharCode(Math.random() * 11172 + 0xAC00)
-                const isMatch = regex.test(randStr)
+            for (let i = 0; i < 0xFFFFFF; i++) {
 
+                let randStr = String.fromCharCode(Math.random() * 0x5d + 0x21)
+                let iRandStr = ""
+                for (let j = 0; j < 100; j++) {
+                    randStr = randStr + String.fromCharCode(Math.random() * 0x5d + 0x21)
+                    iRandStr = i.toString(16).padStart(6, "0") + "//" + randStr
+                }
+                const isMatch = regex.test(randStr)
                 if (isMatch == true)
-                    console.log(randStr)
+                    console.log(iRandStr)
                 //else
                 // console.log("not matched")
 
@@ -37,5 +22,5 @@ export default async function RegExCreate() {
         }
 
     }
-    return (<>{callGenRandStr()}</>)
+    return (<>{Create()}</>)
 }
