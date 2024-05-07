@@ -21,5 +21,5 @@ export default async function RegExCreate() {
             console.log(genRandStr(getRandNum()))
     }
 
-    return (<>{callGenRandStr()}</>)
+    return (<>--</>)
 }
