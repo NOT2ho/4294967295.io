@@ -1,5 +1,20 @@
+
+import { readRange } from "./db"
+import { Read2 } from "./db";
 export default async function read() {
-  return (
-    " 안타깝게도 아직 작성한 글을 볼 수 있는 기능은 구현되지 않았습니다. 하지만 여러분의 소중한 의견은 제 db에 잘 저장되므로 저는 읽을 수 있으니 걱정하지 않으셔도 됩니다!4294967295 올림."
+  let document;
+
+  if (typeof document !== "undefined") {
+    document.read.Read2()
+  }
+
+
+  return (<form name="read" action={Read2}>
+    <input type="range" id="body" name="body" min="0" max={await readRange()} />
+    <input type="submit"></input>
+    <>{Read2}</>
+  </form>
   )
+
+
 }
