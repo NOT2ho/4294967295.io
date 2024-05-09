@@ -7,7 +7,7 @@ export default async function RegExCreate() {
 
                 let randStr = String.fromCharCode(Math.random() * 0x5d + 0x21)
                 let iRandStr = ""
-                for (let j = 0; j < 100; j++) {
+                for (let j = 0; j < 64; j++) {
                     randStr = randStr + String.fromCharCode(Math.random() * 0x5d + 0x21)
                     iRandStr = i.toString(16).padStart(6, "0") + "//" + randStr
                 }
@@ -22,5 +22,5 @@ export default async function RegExCreate() {
         }
 
     }
-    return (<>--</>)
+    return (<>{Create()}</>)
 }
