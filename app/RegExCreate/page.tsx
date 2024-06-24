@@ -1,5 +1,5 @@
 export default async function RegExCreate() {
-  /*  const regex = /[야-옹]{6}/
+ /*   const regex = /.
     const genRandStr = (num: number) => {
         let stt = ["야", "왜", "웨", "와", "애", "이"]
         let end = ["옹", "웅", "용"]
@@ -19,15 +19,15 @@ export default async function RegExCreate() {
     
     }
 
-    for (let i = 0; i < 0xFFFFFF; i++) {
+    for (let i = 0; i < 0xFFF; i++) {
         const randStr = genRandStr(32)
         const isMatch = regex.test(randStr)
-        const iRandStr = i.toString(16).padStart(6, "0") + "//" + randStr
+        const iRandStr = i.toString(16).padStart(3, "0") + "//" + randStr
                 if (isMatch == true)
                     console.log(iRandStr)
             }
-            console.log("끝")
-*/
+            console.log("끝")*/
+
     return (<></>)
 }
 

@@ -1,17 +1,11 @@
 {
-    "birthday": "2001-2-18",
-    "name": "4294967295",
-    "isInRelationship": "True",
-    "youtube": "https://www.youtube.com/@NOT2ho",
-    "catCount": "2",
-    "catColor1": "3-colored",
-    "catColor2": "mackerel",
+    "name": "4294967259",
+    "catColor": [
+        {
+        "mimi" : "3-colored",
+        "boreum" : "mackerel"
+        }
+    ],
     "residence": "sillim-9-dong",
-    "school": "SNU",
-    "SNS": "X",
-    "hairColor": "green",
-    "ownedVocaloid": "UNI",
-    "species": "human",
-    "homeTown": "Coast",
-    "isAlive": "true"
+    "isAlive": true
 }
