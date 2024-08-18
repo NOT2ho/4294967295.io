@@ -121,7 +121,6 @@ export default async function markovCreate() {
         console.error(err);
     }
 
-    return (<></>)
 
     /*
     fs.readFile('/tmp/tmp.txt', (err, data) => {
@@ -132,6 +131,6 @@ export default async function markovCreate() {
         
     })*/
     //redirect('/markovResult');
-    // redirect('/markovResult')
+    redirect('/markovResult')
     //   redirect('/markovResult')
 }
