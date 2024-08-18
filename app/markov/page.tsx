@@ -1,10 +1,7 @@
 import { writeFile } from 'fs/promises'
-import { join } from 'path'
-import { redirect } from 'next/navigation'
-import { revalidatePath } from 'next/cache'
 
 
-export default function ServerUploadPage() {
+export default async function ServerUploadPage() {
   async function upload(data: FormData) {
     'use server'
 

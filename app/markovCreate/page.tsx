@@ -1,4 +1,4 @@
-import fs from 'fs'
+import { promises as fs } from 'fs'
 import { join } from 'path'
 import axios from 'axios'
 import { nGram } from "simplengrams";
@@ -6,18 +6,14 @@ import pool from "../lib/db";
 
 
 import { redirect } from 'next/navigation'
-export default function markovCreate() {
-    fs.readFile('/tmp/tmp.txt', (err, data) => {
-        if (err) {
-            console.error(err);
-            return;
-        }
+export default async function markovCreate() {
+    try {
+        const data = await fs.readFile('/tmp/tmp.txt');
         const text = data.toString();
-
         
-        axios
+        const res = await axios
             .post( 
-                "http://aiopen.etri.re.kr:8000/WiseNLU_spoken",
+                "http://aiopen.etri.re.kr:8000/WiseNLU",
                 {
                     argument: {
                         analysis_code: "morp", 
@@ -31,21 +27,16 @@ export default function markovCreate() {
                     },
                 }
             )
-            .then((res) => {
-                const sentenceArray = res.data.return_object.sentence
-                const resultArr = sentenceArray.map((e) => e.morp);
-                fs.writeFile((process.env.PUBLIC_URL,'/tmp/morp.txt'), JSON.stringify(resultArr), (err) => {
-                    if (err) console.log('Error: ', err);
-                },
-                )
-      
-           
-            }
-            )
+        const sentenceArray = res.data.return_object.sentence
+        const resultArr = sentenceArray.map((e) => e.morp);
+        try {
+            const _ = fs.writeFile('/tmp/morp.txt', JSON.stringify(resultArr));
+        } catch (err) {
+            if (err) console.log('Error: ', err);
+        }
         
-        fs.readFile(('/tmp/morp.txt'), (err, data) => {
-            if (err)
-                console.error(err);
+        try {
+            const data = fs.readFile('/tmp/morp.txt');
                                 
             const genSentence = (cfd, landkey, num) => {
                 let sentence = ['']
@@ -62,10 +53,10 @@ export default function markovCreate() {
             }
    
             const calc_cfd = () => {
-                let cfd = new Object;
+                let cfd = {};
                 const words = JSON.parse(data.toString())
                 let sentences = [[]]
-                let ngrams : (string|null)[][] = []
+                let ngrams: (string | null)[][] = []
                 for (let s in words) {
                     for (let i in words[s]) {
                         sentences.push(words[s][i]['lemma'])
@@ -76,31 +67,31 @@ export default function markovCreate() {
                        
                     }
                 }
-                 const landkey = ngrams[Math.floor(Math.random() * ngrams.length)][0]
+                const landkey = ngrams[Math.floor(Math.random() * ngrams.length)][0]
                 for (let arrs in ngrams) {
                     let arr = ngrams[arrs]
                     if (arr[0] == null) {
                         throw "ngram issue"
                     }
                     let w1: string = arr[0]
-                    Object.assign(cfd, {[w1]: [] })
+                    Object.assign(cfd, { [w1]: [] })
                     for (let arrs2 in ngrams) {
                         let arr = ngrams[arrs2]
                         let p1 = arr[0]
                         let p2 = arr[1]
                         
-                        if (w1 == p1) 
+                        if (w1 == p1)
                             cfd[w1].push(p2)
                         
                     }
-                 
                 }
                     
                 return [cfd, landkey]
             }
+
             const max = 500
             const min = 50
-            let res = genSentence(calc_cfd()[0],calc_cfd()[1], Math.floor(Math.random() *(max - min) + min))
+            let res = genSentence(calc_cfd()[0], calc_cfd()[1], Math.floor(Math.random() * (max - min) + min))
             console.log(res)
         
             const insert = async () => {
@@ -112,15 +103,26 @@ export default function markovCreate() {
                     console.log(err);
                 }
             }
-            insert()
-            
+
+            await insert();
+            redirect('/markovResult');
+        } catch (err) {
+            if (err)
+                console.error(err);
         }
-            
-    )
-        
+    } catch (err) {
+        console.error(err);
     }
-        )
+
+    /*
+    fs.readFile('/tmp/tmp.txt', (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        
+    })*/
+
     // redirect('/markovResult')
-   redirect('/markovResult')
     //   redirect('/markovResult')
 }
