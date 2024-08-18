@@ -1,4 +1,5 @@
 import { writeFile } from 'fs/promises'
+import markovCreate from '../markovCreate/page'
 
 
 export default async function ServerUploadPage() {
@@ -28,7 +29,7 @@ export default async function ServerUploadPage() {
         <input type="file" name="file" />
         <input type="submit" value="Upload" />
       </form>
-            <form action="/markovCreate">
+            <form action={markovCreate}>
         <button type="submit" >생성</button>
       </form>
     </main>
