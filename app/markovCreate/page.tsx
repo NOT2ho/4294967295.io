@@ -6,7 +6,7 @@ import pool from "../lib/db";
 
 import { redirect } from 'next/navigation'
 export default function markovCreate() {
-    fs.readFile('../../file/tmp.txt', (err, data) => {
+    fs.readFile('../file/tmp.txt', (err, data) => {
         if (err) {
             console.error(err);
             return;
