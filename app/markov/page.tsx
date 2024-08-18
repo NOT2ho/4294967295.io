@@ -16,7 +16,7 @@ export default async function ServerUploadPage() {
     
     const path = '/tmp/tmp.txt'
     await writeFile(path, buffer)
-
+    console.log('file uploaded')
     return { success: true }
   }
 
@@ -29,7 +29,7 @@ export default async function ServerUploadPage() {
         <input type="file" name="file" />
         <input type="submit" value="Upload" />
       </form>
-            <form action='/markovCreate'>
+            <form action={markovCreate}>
         <button type="submit" >생성</button>
       </form>
     </main>

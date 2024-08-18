@@ -112,7 +112,7 @@ export default async function markovCreate() {
             }
 
             await insert();
-            
+             redirect('/markovResult')
         } catch (err) {
             if (err)
                 console.error(err);
@@ -131,6 +131,6 @@ export default async function markovCreate() {
         
     })*/
     //redirect('/markovResult');
-    redirect('/markovResult')
+   
     //   redirect('/markovResult')
 }
