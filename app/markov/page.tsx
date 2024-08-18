@@ -9,12 +9,15 @@ export default async function ServerUploadPage() {
     if (!file) {
       throw new Error('No file uploaded')
     }
+    console.log(file)
 
     const bytes = await file.arrayBuffer()
+    console.log("done1")
     const buffer = Buffer.from(bytes)
     
     const path = '/tmp/tmp.txt'
     await writeFile(path, buffer)
+    console.log("done2")
 
     return { success: true }
   }
