@@ -9,9 +9,7 @@ import pool from "../lib/db";
 
 import { redirect } from 'next/navigation'
 export default async function markovCreate() {
-    console.log("before try")
     try {
-        console.log("after try")
         const data = await fs.readFile('/tmp/tmp.txt');
         const text = data.toString();
         console.log("text: " + text)
@@ -43,7 +41,7 @@ export default async function markovCreate() {
         }
         
         try {
-            const data = fs.readFile('/tmp/morp.txt');
+            const data = await fs.readFile('/tmp/morp.txt');
                                 
             const genSentence = (cfd, landkey, num) => {
                 let sentence = ['']
@@ -112,7 +110,7 @@ export default async function markovCreate() {
             }
 
             await insert();
-             redirect('/markovResult')
+             
         } catch (err) {
             if (err)
                 console.error(err);
@@ -120,7 +118,7 @@ export default async function markovCreate() {
     } catch (err) {
         console.error(err);
     }
-
+redirect('/markovResult')
 
     /*
     fs.readFile('/tmp/tmp.txt', (err, data) => {
