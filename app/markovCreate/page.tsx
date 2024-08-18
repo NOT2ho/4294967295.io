@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { join } from 'path'
 import axios from 'axios'
 import { nGram } from "simplengrams";
 import pool from "../lib/db";
@@ -6,7 +7,7 @@ import pool from "../lib/db";
 
 import { redirect } from 'next/navigation'
 export default function markovCreate() {
-    fs.readFile('../file/tmp.txt', (err, data) => {
+    fs.readFile(join(process.cwd(),'tmp.txt'), (err, data) => {
         if (err) {
             console.error(err);
             return;
