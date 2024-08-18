@@ -16,7 +16,6 @@
     "elevenlabs-node": "^2.0.3",
     "formidable": "^3.5.1",
     "gaussian": "^1.3.0",
-    "java": "^0.14.0",
     "mecab-ya": "^0.1.1",
     "mysql2": "^3.9.3",
     "n-gram": "^2.0.2",
