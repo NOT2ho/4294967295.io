@@ -34,7 +34,7 @@ export default function markovCreate() {
             .then((res) => {
                 const sentenceArray = res.data.return_object.sentence
                 const resultArr = sentenceArray.map((e) => e.morp);
-                fs.writeFile('./file/morp.txt', JSON.stringify(resultArr), (err) => {
+                fs.writeFile(join(process.cwd(),'file/morp.txt'), JSON.stringify(resultArr), (err) => {
                     if (err) console.log('Error: ', err);
                     else console.log('File created');
                 },
@@ -44,7 +44,7 @@ export default function markovCreate() {
             }
             )
         
-        fs.readFile('./file/morp.txt', (err, data) => {
+        fs.readFile(join(process.cwd(),'/file/morp.txt'), (err, data) => {
             if (err)
                 console.error(err);
                                 
