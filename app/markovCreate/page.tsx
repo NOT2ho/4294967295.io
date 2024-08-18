@@ -7,7 +7,9 @@ import pool from "../lib/db";
 
 import { redirect } from 'next/navigation'
 export default async function markovCreate() {
+    console.log("before try")
     try {
+        console.log("after try")
         const data = await fs.readFile('/tmp/tmp.txt');
         const text = data.toString();
         console.log("text: " + text)
