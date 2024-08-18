@@ -65,7 +65,7 @@ export default function markovCreate() {
                 let cfd = new Object;
                 const words = JSON.parse(data.toString())
                 let sentences = [[]]
-                let ngrams = []
+                let ngrams : (string|null)[][] = []
                 for (let s in words) {
                     for (let i in words[s]) {
                         sentences.push(words[s][i]['lemma'])
@@ -79,8 +79,10 @@ export default function markovCreate() {
                  const landkey = ngrams[Math.floor(Math.random() * ngrams.length)][0]
                 for (let arrs in ngrams) {
                     let arr = ngrams[arrs]
-                    let w1 = arr[0]
-                    let w2 = arr[1]
+                    if (arr[0] == null) {
+                        throw "ngram issue"
+                    }
+                    let w1: string = arr[0]
                     Object.assign(cfd, {[w1]: [] })
                     for (let arrs2 in ngrams) {
                         let arr = ngrams[arrs2]
