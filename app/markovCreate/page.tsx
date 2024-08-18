@@ -125,7 +125,7 @@ export default async function markovCreate() {
         }
         
     })*/
-redirect('/markovResult');
+    //redirect('/markovResult');
     // redirect('/markovResult')
     //   redirect('/markovResult')
 }
