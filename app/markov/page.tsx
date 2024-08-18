@@ -12,12 +12,11 @@ export default function ServerUploadPage() {
     if (!file) {
       throw new Error('No file uploaded')
     }
-    if (process.env.PUBLIC_URL === undefined)
-      throw "vercel issue"
+
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
     
-    const path = join(process.env.PUBLIC_URL, '/file/', 'tmp.txt')
+    const path = join('/file/', 'tmp.txt')
     await writeFile(path, buffer)
 
     return { success: true }

@@ -7,9 +7,7 @@ import pool from "../lib/db";
 
 import { redirect } from 'next/navigation'
 export default function markovCreate() {
-        if (process.env.PUBLIC_URL === undefined)
-      throw "vercel issue"
-    fs.readFile(join(process.env.PUBLIC_URL,'/file/tmp.txt'), (err, data) => {
+    fs.readFile('/file/tmp.txt', (err, data) => {
         if (err) {
             console.error(err);
             return;
@@ -46,7 +44,7 @@ export default function markovCreate() {
             }
             )
         
-        fs.readFile(join(process.cwd(),'/file/morp.txt'), (err, data) => {
+        fs.readFile(('/file/morp.txt'), (err, data) => {
             if (err)
                 console.error(err);
                                 
