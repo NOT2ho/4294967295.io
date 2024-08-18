@@ -10,6 +10,7 @@ export default async function markovCreate() {
     try {
         const data = await fs.readFile('/tmp/tmp.txt');
         const text = data.toString();
+        console.log("text: " + text)
         
         const res = await axios
             .post( 
@@ -27,6 +28,8 @@ export default async function markovCreate() {
                     },
                 }
             )
+        
+        console.log(res)
         const sentenceArray = res.data.return_object.sentence
         const resultArr = sentenceArray.map((e) => e.morp);
         try {
