@@ -31,7 +31,7 @@ export default function ServerUploadPage() {
         <input type="file" name="file" />
         <input type="submit" value="Upload" />
       </form>
-            <form action="/markovCreate" method = "POST">
+            <form action="/markovCreate">
         <button type="submit" >생성</button>
       </form>
     </main>
