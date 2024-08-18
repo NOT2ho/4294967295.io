@@ -3,6 +3,7 @@ import { join } from 'path'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 
+
 export default function ServerUploadPage() {
   async function upload(data: FormData) {
     'use server'
@@ -11,11 +12,12 @@ export default function ServerUploadPage() {
     if (!file) {
       throw new Error('No file uploaded')
     }
-
+    if (process.env.PUBLIC_URL === undefined)
+      throw "vercel issue"
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
     
-    const path = join(process.cwd(), '/file/', 'tmp.txt')
+    const path = join(process.env.PUBLIC_URL, '/file/', 'tmp.txt')
     await writeFile(path, buffer)
 
     return { success: true }

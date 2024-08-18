@@ -7,7 +7,9 @@ import pool from "../lib/db";
 
 import { redirect } from 'next/navigation'
 export default function markovCreate() {
-    fs.readFile(join(process.cwd(),'tmp.txt'), (err, data) => {
+        if (process.env.PUBLIC_URL === undefined)
+      throw "vercel issue"
+    fs.readFile(join(process.env.PUBLIC_URL,'/file/tmp.txt'), (err, data) => {
         if (err) {
             console.error(err);
             return;
@@ -34,7 +36,7 @@ export default function markovCreate() {
             .then((res) => {
                 const sentenceArray = res.data.return_object.sentence
                 const resultArr = sentenceArray.map((e) => e.morp);
-                fs.writeFile(join(process.cwd(),'file/morp.txt'), JSON.stringify(resultArr), (err) => {
+                fs.writeFile(process.env.PUBLIC_URL,'/file/morp.txt'), JSON.stringify(resultArr), (err) => {
                     if (err) console.log('Error: ', err);
                     else console.log('File created');
                 },
