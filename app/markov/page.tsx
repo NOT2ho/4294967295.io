@@ -17,7 +17,7 @@ export default function ServerUploadPage() {
 
     // With the file data in the buffer, you can do whatever you want with it.
     // For this, we'll just write it to the filesystem in a new location
-    const path = join('./file/', 'tmp.txt')
+    const path = join('../../file/', 'tmp.txt')
     await writeFile(path, buffer)
     console.log(`open ${path} to see the uploaded file`)
 
