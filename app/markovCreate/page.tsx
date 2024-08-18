@@ -7,7 +7,7 @@ import pool from "../lib/db";
 
 import { redirect } from 'next/navigation'
 export default function markovCreate() {
-    fs.readFile('/file/tmp.txt', (err, data) => {
+    fs.readFile('/tmp.txt', (err, data) => {
         if (err) {
             console.error(err);
             return;
@@ -34,9 +34,8 @@ export default function markovCreate() {
             .then((res) => {
                 const sentenceArray = res.data.return_object.sentence
                 const resultArr = sentenceArray.map((e) => e.morp);
-                fs.writeFile((process.env.PUBLIC_URL,'/file/morp.txt'), JSON.stringify(resultArr), (err) => {
+                fs.writeFile((process.env.PUBLIC_URL,'/morp.txt'), JSON.stringify(resultArr), (err) => {
                     if (err) console.log('Error: ', err);
-                    else console.log('File created');
                 },
                 )
       
@@ -44,7 +43,7 @@ export default function markovCreate() {
             }
             )
         
-        fs.readFile(('/file/morp.txt'), (err, data) => {
+        fs.readFile(('/morp.txt'), (err, data) => {
             if (err)
                 console.error(err);
                                 

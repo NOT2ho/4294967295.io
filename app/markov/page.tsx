@@ -16,7 +16,7 @@ export default function ServerUploadPage() {
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
     
-    const path = join('/file/', 'tmp.txt')
+    const path = '/tmp.txt'
     await writeFile(path, buffer)
 
     return { success: true }
