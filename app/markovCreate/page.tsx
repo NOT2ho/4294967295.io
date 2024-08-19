@@ -26,10 +26,11 @@ export default async function markovCreate() {
                 {
                     headers: {
                         
-                        Authorization: process.env.APIKEY,
+                        Authorization: '36cdb264-5d2e-40eb-a067-439b7647fe18',
                     },
                 }
             )
+            
         
         console.log(res)
         const sentenceArray = res.data.return_object.sentence
