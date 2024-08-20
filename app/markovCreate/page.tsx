@@ -1,81 +1,58 @@
 'use server'
 
 import { promises as fs } from 'fs'
-import { join } from 'path'
-import axios from 'axios'
 import { nGram } from "simplengrams";
 import pool from "../lib/db";
 
 
 import { redirect } from 'next/navigation'
 export default async function markovCreate() {
-    try {
-        const data = await fs.readFile('/tmp/tmp.txt');
-        const text = data.toString();
+        const datas = await fs.readFile('/tmp/tmp.txt');
+        const text = datas.toString();
         console.log("text: " + text)
+
+        const data = await pos(text) ?? ''
         
-        const res = await axios
-            .post( 
-                "http://aiopen.etri.re.kr:8000/WiseNLU",
-                {
-                    argument: {
-                        analysis_code: "morp", 
-                        text: text,
-                    },
-                },
-                {
-                    headers: {
-                        
-                        Authorization: '36cdb264-5d2e-40eb-a067-439b7647fe18',
-                    },
-                }
-            )
-            
-        
-        console.log(res)
-        const sentenceArray = res.data.return_object.sentence
-        const resultArr = sentenceArray.map((e) => e.morp);
-        try {
-            const _ = fs.writeFile('/tmp/morp.txt', JSON.stringify(resultArr));
-        } catch (err) {
-            if (err) console.log('Error: ', err);
-        }
-        
-        try {
-            const data = await fs.readFile('/tmp/morp.txt');
-                                
-            const genSentence = (cfd, landkey, num) => {
+        async function genSentence(cfd, landkey, num) {
                 let sentence = ['']
-                
-                let word = cfd[landkey][0]
+            let word = await cfd[await landkey][0]
                 for (let i = 0; i < num; i++) {
                     sentence.push(word)
-                    word = cfd[word][Math.floor(Math.random() * cfd[word].length)]
+                //    console.log(cfd)
+                    console.log(word)
+                    if (cfd[word]) 
+                        word = cfd[word][Math.floor(Math.random() * (cfd[word].length))]
+                    else
+                        continue
+            }
 
-                }
+            
                 //const regEx = /'^J|^E|^X|^S'/
                 let res = sentence.join(' ')
                 return res
             }
+            //console.log(data)
    
-            const calc_cfd = () => {
+            async function calc_cfd() {
                 let cfd = {};
-                const words = JSON.parse(data.toString())
+                const words : any = data
                 let sentences = [[]]
                 let ngrams: (string | null)[][] = []
+
                 for (let s in words) {
-                    for (let i in words[s]) {
-                        sentences.push(words[s][i]['lemma'])
-                    
+                            
+                        sentences.push(words[s][0])
+                        //    console.log(words[s][0])
                 
-                        let sentence = sentences.join(' ')
-                        ngrams = nGram(sentence);
-                       
+                    
                     }
-                }
-                const landkey = ngrams[Math.floor(Math.random() * ngrams.length)][0]
+                
+                
+                                let sentence = sentences.join(' ')
+                        ngrams = nGram(sentence);
                 for (let arrs in ngrams) {
                     let arr = ngrams[arrs]
+                    //console.log(arr)
                     if (arr[0] == null) {
                         throw "ngram issue"
                     }
@@ -88,17 +65,20 @@ export default async function markovCreate() {
                         
                         if (w1 == p1)
                             cfd[w1].push(p2)
-                        
+                        //console.log('들어감')
                     }
+                  
                 }
-                    
+              console.log(ngrams)
+                const landkey = ngrams[Math.floor(Math.random() * ngrams.length)][0]
+               
                 return [cfd, landkey]
+                
             }
-
-            const max = 500
+                       const max = 500
             const min = 50
-            let res = genSentence(calc_cfd()[0], calc_cfd()[1], Math.floor(Math.random() * (max - min) + min))
-            console.log(res)
+            let res = await genSentence((await calc_cfd())[0], (await calc_cfd())[1], Math.floor(Math.random() * (max - min) + min))
+           console.log(res)
         
             const insert = async () => {
                 try {
@@ -111,25 +91,64 @@ export default async function markovCreate() {
             }
 
             await insert();
-             
-        } catch (err) {
-            if (err)
-                console.error(err);
+             redirect('/markovResult')
         }
-    } catch (err) {
-        console.error(err);
-    }
-redirect('/markovResult')
 
-    /*
-    fs.readFile('/tmp/tmp.txt', (err, data) => {
-        if (err) {
-            console.error(err);
-            return;
+        /*
+        fs.readFile('/tmp/tmp.txt', (err, data) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            
+        })*/
+    
+    
+    async function pos(text) {
+         console.log("실행됨")
+        const str_ = text.replace(/[^가-힣a-zA-Z\n ]*/g, "")
+        const str = str_.replace(/\n+/g, " ")
+        console.log('정규식이 왜 안 되지: ' + str)
+        const undefArr = str.split(' ')
+        const arr = await undefArr.splice(1, undefArr.length)
+        // console.log(arr)
+        let word = 'n'
+        let tag = ''
+        let res: string[][] = []
+        let regex = /nothing/
+    
+        async function csvRead(csv) {
+            let csvs = csv.toString().split('\n')
+            return csvs
         }
-        
-    })*/
-    //redirect('/markovResult');
-   
-    //   redirect('/markovResult')
-}
+        async function ifN() {
+            try {
+                const data = await fs.readFile('/tmp/dic.csv')
+                let pd = await csvRead(data)
+                for (let j in arr) {
+                    for (let i in pd) {
+                        word = pd[i].split(',')[0]
+                        tag = pd[i].split(',')[1].slice(0, -2)
+                        regex = new RegExp(`^(${word})`);
+               
+                        if (regex.test(arr[j]) === true) {
+                            res.push([word, tag])
+                            console.log("true")
+                            if (word.length != arr[j].length)
+                                res.push([arr[j].slice(word.length, arr[j].length), 'J|X'])
+                            pd = pd.splice(1, pd.length)
+                                   
+                        }
+
+                    }
+                } return res
+            }
+            catch (err) {
+                console.error(err)
+            }
+        }
+        return (ifN())
+       
+        //   redirect('/markovResult')
+    }
+

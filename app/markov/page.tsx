@@ -25,16 +25,16 @@ export default async function ServerUploadPage() {
 
   return (
     <main>
-      <h1>랜덤 문장 생성기: 지금 api차단당해서 못 함. 형태소 분석기를 만들면 돌아오겠습니다 </h1>
-      <h2>*1만 자 이하*의 텍스트를 업로드하세요. 문자열이 충분히 길지 않으면 결과가 잘 안 나옵니다. 하지만 문자열이 많이 길면 느립니다.<br></br>입력은 삭제됩니다. </h2>
+      <h1>랜덤 문장 생성기: 느림 </h1>
+      <h2>많이 긴 문자열을 입력하세요. 제 형태소 분석기가 아직 많이 느려서 조금 오래 기다리셔야 합니다.<br></br>입력은 삭제됩니다. </h2>
       <h3>정확히는 덮어씌워집니다.</h3>
-      <>아무것도 안 넣거나 잘못된 텍스트를 넣거나 api단에서 오류가 난다면 직전에 생성된 문장이 출력됩니다. 행운을 빕니다.</>
+      <>etri가 저를 차단했습니다. 그래서 느립니다.</>
       <form action={upload}>
         <textarea name="content" placeholder='^ _______ ^' /><br></br>
         <button type="submit">이 버튼을 먼저 누르고 생성 버튼을 누르십시오</button>
     </form>
             <form action={markovCreate}>
-        <button type="submit" >생성(누르고 좀 기다리십시오)</button>
+        <button type="submit" >생성(누르고 페이지가 넘어갈 때까지 기다리십시오. 엄청나게 오래 걸립니다.)</button>
       </form>
     </main>
   )
