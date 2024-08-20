@@ -9,9 +9,9 @@ import os from 'os'
 import { redirect } from 'next/navigation'
 export default async function markovCreate() {
     try {
-        await fs.readdir('/tmp')
+        await fs.readFile('/tmp/tmp.txt')
     } catch (err) {
-        await fs.mkdir('/tmp')
+        await fs.writeFile('/tmp/tmp.txt', "")
     }
         const datas = await fs.readFile('/tmp/tmp.txt');
         const text = datas.toString();
