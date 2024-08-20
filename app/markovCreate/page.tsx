@@ -128,7 +128,7 @@ export default async function markovCreate() {
         }
         async function ifN() {
             try {
-                const data = await fs.readFile(process.cwd() + '/dic.csv')
+                const data = await fs.readFile(process.cwd() + '/app/markovCreate/dic.csv')
                 let pd = await csvRead(data)
                 for (let j in arr) {
                     for (let i in pd) {
