@@ -15,7 +15,7 @@ export default async function markovCreate() {
     }
         const datas = await fs.readFile('/tmp/tmp.txt');
         const text = datas.toString();
-        console.log("text: " + text)
+        //console.log("text: " + text)
 
         const data = await pos(text) ?? ''
         
@@ -24,8 +24,8 @@ export default async function markovCreate() {
             let word = await cfd[await landkey][0]
                 for (let i = 0; i < num; i++) {
                     sentence.push(word)
-                //    console.log(cfd)
-                    console.log(word)
+                //    //console.log(cfd)
+                    //console.log(word)
                     if (cfd[word]) 
                         word = cfd[word][Math.floor(Math.random() * (cfd[word].length))]
                     else
@@ -37,7 +37,7 @@ export default async function markovCreate() {
                 let res = sentence.join(' ')
                 return res
             }
-            //console.log(data)
+            ////console.log(data)
    
             async function calc_cfd() {
                 let cfd = {};
@@ -48,7 +48,7 @@ export default async function markovCreate() {
                 for (let s in words) {
                             
                         sentences.push(words[s][0])
-                        //    console.log(words[s][0])
+                        //    //console.log(words[s][0])
                 
                     
                     }
@@ -58,7 +58,7 @@ export default async function markovCreate() {
                         ngrams = nGram(sentence);
                 for (let arrs in ngrams) {
                     let arr = ngrams[arrs]
-                    //console.log(arr)
+                    ////console.log(arr)
                     if (arr[0] == null) {
                         throw "ngram issue"
                     }
@@ -71,11 +71,11 @@ export default async function markovCreate() {
                         
                         if (w1 == p1)
                             cfd[w1].push(p2)
-                        //console.log('들어감')
+                        ////console.log('들어감')
                     }
                   
                 }
-              console.log(ngrams)
+              //console.log(ngrams)
                 const landkey = ngrams[Math.floor(Math.random() * ngrams.length)][0]
                
                 return [cfd, landkey]
@@ -84,15 +84,15 @@ export default async function markovCreate() {
                        const max = 500
             const min = 50
             let res = await genSentence((await calc_cfd())[0], (await calc_cfd())[1], Math.floor(Math.random() * (max - min) + min))
-           console.log(res)
+           //console.log(res)
         
             const insert = async () => {
                 try {
                     const sql = 'INSERT INTO markov (body) VALUES ("?")';
                     const result = await pool.query(sql, [res]);
-                    console.log(result);
+                    //console.log(result);
                 } catch (err) {
-                    console.log(err);
+                    //console.log(err);
                 }
             }
 
@@ -114,10 +114,10 @@ export default async function markovCreate() {
          console.log("실행됨")
         const str_ = text.replace(/[^가-힣a-zA-Z\n ]*/g, "")
         const str = str_.replace(/\n+/g, " ")
-        console.log('정규식이 왜 안 되지: ' + str)
+       // //console.log('정규식이 왜 안 되지: ' + str)
         const undefArr = str.split(' ')
         const arr = await undefArr.splice(1, undefArr.length)
-        // console.log(arr)
+        // //console.log(arr)
         let word = 'n'
         let tag = ''
         let res: string[][] = []
@@ -139,7 +139,7 @@ export default async function markovCreate() {
                
                         if (regex.test(arr[j]) === true) {
                             res.push([word, tag])
-                            console.log("true")
+                            //console.log("true")
                             if (word.length != arr[j].length)
                                 res.push([arr[j].slice(word.length, arr[j].length), 'J|X'])
                             pd = pd.splice(1, pd.length)
