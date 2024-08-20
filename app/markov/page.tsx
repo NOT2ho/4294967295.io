@@ -6,7 +6,7 @@ export default async function ServerUploadPage() {
  
   async function upload(formData: FormData) {
     'use server'
-     await writeFile('/tmp/tmp.txt', '..')
+    
    /* const file: File | null = data.get('file') as unknown as File
     if (!file) {
       throw new Error('No file uploaded')

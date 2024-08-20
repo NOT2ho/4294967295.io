@@ -8,6 +8,11 @@ import os from 'os'
 
 import { redirect } from 'next/navigation'
 export default async function markovCreate() {
+    try {
+        await fs.readdir('/tmp')
+    } catch (err) {
+        await fs.mkdir('/tmp')
+    }
         const datas = await fs.readFile('/tmp/tmp.txt');
         const text = datas.toString();
         console.log("text: " + text)
