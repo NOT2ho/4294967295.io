@@ -1,7 +1,9 @@
 const nextConfig = {
     reactStrictMode: false,
     swcMinify: true,
-
+     experimental: { 
+    nftTracing: true 
+  },
     webpack: (config, { isServer }) => {
         if (!isServer) {
 
