@@ -26,8 +26,8 @@ export default async function ServerUploadPage() {
 
   return (
     <main>
-      <h1>랜덤 문장 생성기: 느림 </h1>
-      <h2>많이 긴 문자열을 입력하세요. 제 형태소 분석기가 아직 많이 느려서 조금 오래 기다리셔야 합니다.<br></br>입력은 삭제됩니다. </h2>
+      <h1>랜덤 문장 생성기: 504 gateway timeout </h1>
+      <h2>많이 긴 문자열을 입력하세요. 근데 형태소 분석기가 너무 느려서 504가 뜹니다<br></br>입력은 삭제됩니다. </h2>
       <h3>정확히는 덮어씌워집니다.</h3>
       <>etri가 저를 차단했습니다. 그래서 느립니다.</>
       <form action={upload}>
