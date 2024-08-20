@@ -1,6 +1,6 @@
-import fs from 'fs'
+import { writeFile } from 'fs/promises'
 import markovCreate from '../markovCreate/page'
-import os from 'os'
+
 
 export default async function ServerUploadPage() {
   async function upload(formData: FormData) {
@@ -17,12 +17,12 @@ export default async function ServerUploadPage() {
     let txt : string | undefined = formData.get('content')?.toString()
     let buf = txt ? Buffer.from(txt) : Buffer.from("")
     console.log(txt)
-    const path = os.tmpdir() + '/tmp.txt'
-   fs.writeFile(path, buf, ()=> {})
+    const path = '/tmp/tmp.txt'
+    await writeFile(path, buf)
     console.log('file uploaded')
     return { success: true }
   }
-
+  
   return (
     <main>
       <h1>랜덤 문장 생성기: 느림 </h1>
