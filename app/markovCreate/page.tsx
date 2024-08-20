@@ -138,7 +138,7 @@ export default async function markovCreate() {
                
                         if (regex.test(arr[j]) === true) {
                             res.push([word, tag])
-                            //console.log("true")
+                            console.log("POS analyzed")
                             if (word.length != arr[j].length)
                                 res.push([arr[j].slice(word.length, arr[j].length), 'J|X'])
                             pd = pd.splice(1, pd.length)
