@@ -1,6 +1,6 @@
-import { writeFile } from 'fs/promises'
+import fs from 'fs'
 import markovCreate from '../markovCreate/page'
-
+import os from 'os'
 
 export default async function ServerUploadPage() {
   async function upload(formData: FormData) {
@@ -17,8 +17,8 @@ export default async function ServerUploadPage() {
     let txt : string | undefined = formData.get('content')?.toString()
     let buf = txt ? Buffer.from(txt) : Buffer.from("")
     console.log(txt)
-    const path = '/tmp/tmp.txt'
-    await writeFile(path, buf)
+    const path = os.tmpdir() + '/tmp.txt'
+   fs.writeFile(path, buf, ()=> {})
     console.log('file uploaded')
     return { success: true }
   }
