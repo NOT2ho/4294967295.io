@@ -2,7 +2,7 @@
 import { promises as fs } from 'fs'
 import { nGram } from "simplengrams";
 import pool from "../lib/db";
-import os from 'os'
+import path from 'path'
 
 
 import { redirect } from 'next/navigation'
@@ -83,7 +83,7 @@ export default async function markovCreate() {
                        const max = 500
             const min = 50
             let res = await genSentence((await calc_cfd())[0], (await calc_cfd())[1], Math.floor(Math.random() * (max - min) + min))
-           //console.log(res)
+           console.log(res)
         
             const insert = async () => {
                 try {
@@ -128,7 +128,7 @@ export default async function markovCreate() {
         }
         async function ifN() {
             try {
-                const data = await fs.readFile(process.cwd() + '/dic.csv')
+                const data = await fs.readFile(path.join(process.cwd() + '/dic.csv'))
                 let pd = await csvRead(data)
                 for (let j in arr) {
                     for (let i in pd) {
