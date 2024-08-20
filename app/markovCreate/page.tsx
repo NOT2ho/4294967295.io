@@ -1,5 +1,4 @@
 'use server'
-
 import { promises as fs } from 'fs'
 import { nGram } from "simplengrams";
 import pool from "../lib/db";
@@ -129,7 +128,7 @@ export default async function markovCreate() {
         }
         async function ifN() {
             try {
-                const data = await fs.readFile('/dic.csv')
+                const data = await fs.readFile('./dic.csv')
                 let pd = await csvRead(data)
                 for (let j in arr) {
                     for (let i in pd) {
