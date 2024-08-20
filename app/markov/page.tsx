@@ -3,7 +3,6 @@ import markovCreate from '../markovCreate/page'
 
 
 export default async function ServerUploadPage() {
-  await writeFile('/tmp/tmp.txt', '..')
   async function upload(formData: FormData) {
     'use server'
     
