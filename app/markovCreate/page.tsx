@@ -213,7 +213,7 @@ class Pos {
         const ac = new AhoCorasick();
         let res : Map<number, string[][]> = new Map();
         try {
-            const data = fss.readFileSync(path.join(process.cwd(), '/node_modules/notpos_kr/dic/dic.csv'))
+            const data = fss.readFileSync(path.join(process.cwd() + '/dic.csv'))
             const pd = data.toString().split('\n');
             for (let i of pd) {
                 let word = i.slice(0, -1).split(',');
