@@ -58,7 +58,8 @@ export default async function markovCreate() {
                 
                                 let sentence = sentences.join(' ')
                 ngrams = nGram(sentence);
-                ngrams[0][0] = ngrams[ngrams.length-1][1]
+                if (!ngrams[1])
+                    (ngrams[0][0] = ngrams[ngrams.length-1][1])
                 for (let arrs in ngrams) {
                     let arr = ngrams[arrs]
                     ////console.log(arr)
