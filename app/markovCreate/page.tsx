@@ -3,6 +3,7 @@ import { promises as fs } from 'fs'
 import { nGram } from "simplengrams";
 import pool from "../lib/db";
 import path from 'path'
+import { Pos } from 'notpos_kr';
 
 
 import { redirect } from 'next/navigation'
@@ -15,8 +16,9 @@ export default async function markovCreate() {
         const datas = await fs.readFile('/tmp/tmp.txt');
         const text = datas.toString();
         //console.log("text: " + text)
+        let pos = new Pos();
 
-        const data = await pos(text) ?? ''
+        const data = pos.tag(text) ?? ''
         
         async function genSentence(cfd, landkey, num) {
                 let sentence = ['']
@@ -99,61 +101,5 @@ export default async function markovCreate() {
              redirect('/markovResult')
         }
 
-        /*
-        fs.readFile('/tmp/tmp.txt', (err, data) => {
-            if (err) {
-                console.error(err);
-                return;
-            }
-            
-        })*/
-    
-    
-    async function pos(text) {
-         console.log("실행됨")
-        const str_ = text.replace(/[^가-힣a-zA-Z\n ]*/g, "")
-        const str = str_.replace(/\n+/g, " ")
-       // //console.log('정규식이 왜 안 되지: ' + str)
-        const undefArr = str.split(' ')
-        const arr = await undefArr.splice(1, undefArr.length)
-        // //console.log(arr)
-        let word = 'n'
-        let tag = ''
-        let res: string[][] = []
-        let regex = /nothing/
-    
-        async function csvRead(csv) {
-            let csvs = csv.toString().split('\n')
-            return csvs
-        }
-        async function ifN() {
-            try {
-                const data = await fs.readFile(path.join(process.cwd() + '/dic.csv'))
-                let pd = await csvRead(data)
-                for (let j in arr) {
-                    for (let i in pd) {
-                        word = pd[i].split(',')[0]
-                        tag = pd[i].split(',')[1].slice(0, -2)
-                        regex = new RegExp(`^(${word})`);
-               
-                        if (regex.test(arr[j]) === true) {
-                            res.push([word, tag])
-                            console.log("POS analyzed")
-                            if (word.length != arr[j].length)
-                                res.push([arr[j].slice(word.length, arr[j].length), 'J|X'])
-                            pd = pd.splice(1, pd.length)
-                                   
-                        }
 
-                    }
-                } return res
-            }
-            catch (err) {
-                console.error(err)
-            }
-        }
-        return (ifN())
-       
-        //   redirect('/markovResult')
-    }
 
