@@ -64,7 +64,7 @@ export default async function markovCreate() {
                     let arr = ngrams[arrs]
                     ////console.log(arr)
                     if (arr[0] == null) {
-                        throw "ngram issue"
+                        arr[0] = " "
                     }
                     
                     let w1: string = arr[0]
