@@ -1,6 +1,8 @@
 
 import { readRange } from "./db"
 import { Read2 } from "./db";
+
+import pool from "../lib/db";
 export default async function read() {
   let document;
 
@@ -8,11 +10,26 @@ export default async function read() {
     document.read.Read2()
   }
 
+const output = async () => {
+    "use server"
+    try {
 
-  return (
-<>안타깝게도 아직 작성한 글을 볼 수 있는 기능은 구현되지 않았습니다<br></br>
-      하지만 여러분의 소중한 의견은 제 db에 잘 저장되므로 저는 읽을 수 있으니 걱정하지 않으셔도 됩니다!<br></br> 4294967295 올림.</>
-    
+        const sql = 'SELECT * FROM memo'
+      let ret = []
+      const rows = await pool.query(sql);
+      for (let i of rows)
+        ret.push(i)
+        return JSON.stringify(ret)
+        //            return Object.values(rows[0])[i]['body']
+
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+  return (<><h1>전체 글(귀찮아서 json 안 깠음)</h1>
+    <h2>여러분의 글을 찾아보세요!</h2>
+    <>{await output()}</></>
   )
 
 
