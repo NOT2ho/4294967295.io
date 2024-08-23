@@ -44,6 +44,7 @@ export default function PosTag() {
     const [hide, setHide] = React.useState(false);
     //setVal([['']])
     const FormSubmit = async (formData: FormData) => {
+        console.log("야옹")
         let i = String(formData.get('body'))
         let arr : string[][] = [['형태소 출력:']]
          let posTag = await tag(i)

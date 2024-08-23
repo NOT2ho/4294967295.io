@@ -1,3 +1,5 @@
+"use server"
+
 import fs from 'fs'
 import path from 'path';
 type ObjType = {
@@ -106,17 +108,7 @@ class AhoCorasick {
     
 }
 
-class Pos {
-    
-    preprocess = (text: string) => {
-        const str = text.replace(/([^가-힣a-zA-Z]*)/, " ")
-        const undefArr = str.split(' ')
-        const arr = undefArr.splice(1, undefArr.length)
-        return arr
-        
-    }
-
-    tag = async (text: string) => {
+    export const tag = async (text: string) => {
        
         const ac = new AhoCorasick()
                 type type2 = { [key: number] : string[][] }
@@ -127,16 +119,16 @@ class Pos {
 
         let res : type4= {}
         try {
-            const notpos = new RegExp(/^(?:.*[\\\/])?notpos_kr(?:[\\\/]*)$/g);
+            //const notpos = new RegExp(/^(?:.*[\\\/])?notpos_kr(?:[\\\/]*)$/g);
        
             
-            const rec = (filepath: string) => {
+           /* const rec = (filepath: string) => {
                 if (notpos.test(filepath))
                     return (path.join(filepath, 'dic/dic.csv'))
                 return rec(path.join(filepath, '..'))
             }
-            
-            const data = fs.readFileSync(rec(__dirname))
+            */
+            const data = fs.readFileSync(process.cwd() + '/dic.csv')
             const pd = data.toString().split('\n')
 
             for (let i in pd) {
@@ -192,6 +184,3 @@ class Pos {
             console.error(err)
         }
     }
-
-}
-export {Pos}
