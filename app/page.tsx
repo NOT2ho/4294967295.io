@@ -14,6 +14,7 @@ export default async function Home() {
             <Link href="/IsPImplyQ">명제 생성기</Link><br></br>
             <Link href="/MeowSound">야옹 생성기 - tts</Link><br></br>
             <Link href="/greenCnt">녹색물산</Link><br></br>
+            <Link href="/pos">한국어 형태소 분석기: 허접</Link><br></br>
             <Link href="/markov">랜덤 문장 생성기 - 마코프 체인</Link><br></br>
             <img src="/nodejs.gif"></img>
         </>
