@@ -1,36 +1,38 @@
-"use server"
-
-import path from 'path'
 import fs from 'fs'
-
-class Node_ {
-    child: Map<string, Node_>;
+import path from 'path';
+type ObjType = {
+  [key: string]: Node;
+};
+class Node {
+    child: ObjType
     output: string[][]
-    fail: null | Node_
+    fail: null | Node
     end : boolean
-    
-    constructor() {
-        this.child = new Map()
-        this.output = []
-        this.fail = null
-        this.end = false
-    }
+
+constructor() {
+    this.child = {}
+    this.output = []
+    this.fail = null
+    this.end = false
+}
+
 }
 
 class AhoCorasick {
-    root: Node_
+    root : Node
     constructor() {
-        this.root = new Node_();
+        this.root = new Node();
     }
 
     insert(words: string[]) {
         let output = words
         let word = words[0]
         let node = this.root;
-        for (const char of word) {
-            if (!node.child.get(char))
-                node.child.set(char, new Node_());
-            node = node.child.get(char) || this.root;
+        for (let i = 0; i < word.length; i++) {
+            const char = word[i];
+            if (!node.child[char])
+                node.child[char] = new Node();
+            node = node.child[char];
         }
         node.output.push(output);
         node.end = true
@@ -38,105 +40,158 @@ class AhoCorasick {
 
 
     fail() {
-        const que : Node_[] = []
-        for (const [i, c] of this.root.child.entries()) {
-            c.fail = this.root;
-            que.push(c);
-          
+        const que : Node[]= []
+        for (const i in this.root.child) {
+            this.root.child[i].fail = this.root;
+            que.push(this.root.child[i]);
+        
             while (que.length > 0) {
-                const currentNode = que.shift();
-                if (typeof currentNode === undefined)
-                    break;
-                            
-                for (const i in currentNode?.child) {
-                    const nextNode = currentNode?.child.get(i);
-
-                    if (nextNode == null)
-                        continue;
-                
+                const currentNode: Node | null = que.shift()!;
+            
+                for (const i in currentNode.child) {
+                    const nextNode = currentNode.child[i]
+             
                     que.push(nextNode);
 
                     let failNode = currentNode.fail;
 
-                    while (failNode !== null && !failNode.child.get(i)) {
+                    while (failNode !== null && !failNode.child[i]) {
                         failNode = failNode.fail;
                     }
                 
-                    if (currentNode != this.root)
-                        nextNode.fail = failNode ? failNode.child.get(i) || this.root : this.root;
-
-                    if (nextNode.fail !== null)
-                        nextNode.output = nextNode.output.concat(nextNode.fail.output);
+                    nextNode.fail = failNode ? failNode.child[i] || this.root : this.root;
+                    nextNode.output = nextNode.output.concat(nextNode.fail!.output);
+                
                 }
         
-            }
+        
+            }            }
+
         }
-    }
+    search(input: string) {
+        type type2 = { [key: number] : string[][] }
 
-    search(input: string) : Map<number, string[][]> {
-        this.fail();
-        let text = input;
-        let result : Map<number, string[][]> = new Map();
-        let currentNode : Node_ | null = this.root;
+        this.fail()
+        let text = input
+        let result: type2 = {}
+        let currentNode : Node | null = this.root;
         for (let i = 0; i < text.length; i++) {
+            
             const char = text[i];
-
-            while (currentNode !== null && !currentNode.child.get(char)) {
+            while (currentNode !== null && !currentNode.child[char]) {
                 currentNode = currentNode.fail;
             }
     
-            currentNode = currentNode ? currentNode.child.get(char) || this.root : this.root;
+            currentNode = currentNode ? currentNode.child[char] || this.root : this.root;
+       
         
             for (const output of currentNode.output) {
-                let resultArray = result.get(i - output[0].length + 1) || [];
-                resultArray.push(output);
-                result.set(i - output[0].length + 1, resultArray);
-            }   
+                
+                    result[i - output[0].length + 1] =[]
+             result[i - output[0].length + 1].push(output)
+      
+              
+                
+            }
+        
+     //       console.log(result)
+            
         }
-        return result;
+                
+            return result
+        
+        
+    }
+        
+    
+}
+
+class Pos {
+    
+    preprocess = (text: string) => {
+        const str = text.replace(/([^가-힣a-zA-Z]*)/, " ")
+        const undefArr = str.split(' ')
+        const arr = undefArr.splice(1, undefArr.length)
+        return arr
+        
+    }
+
+    tag = async (text: string) => {
+       
+        const ac = new AhoCorasick()
+                type type2 = { [key: number] : string[][] }
+        type type3 = { [key: string]: string[][] }
+        type type4 = { [key: string]: string[][] }
+                               type type5= { [key: string] : string[]}
+
+
+        let res : type4= {}
+        try {
+            const notpos = new RegExp(/^(?:.*[\\\/])?notpos_kr(?:[\\\/]*)$/g);
+       
+            
+            const rec = (filepath: string) => {
+                if (notpos.test(filepath))
+                    return (path.join(filepath, 'dic/dic.csv'))
+                return rec(path.join(filepath, '..'))
+            }
+            
+            const data = fs.readFileSync(rec(__dirname))
+            const pd = data.toString().split('\n')
+
+            for (let i in pd) {
+
+                let word = pd[i].slice(0, -1).split(',')
+                
+                
+                ac.insert(word)
+            }
+            res = ac.search(text)
+
+            let result: type3 = {}
+            
+            for (let i of Object.keys(res)) {
+                result[i] = []
+                        result[i].push(res[i][res[i].length-1])
+                    }
+            
+
+
+            let idx = 0
+            let key = 0
+            let ret: type5 = {}
+            let keys = Object.keys(result)
+            for (let i = 0; i < text.length; i++)
+           {
+               key = Number(keys[idx])
+               if (!result[idx]) {
+                     if (text[idx] != ' '){
+                    ret[idx] =[text[idx], 'UNK']
+                    idx++
+                   }
+                   else idx++
+                    
+                } else 
+                  {
+                    
+                   ret[idx] = result[idx][0];
+                     idx += result[idx][0][0].length
+                }
+                
+                    }
+            let out: string[][] = []
+            for (let i of Object.values(ret))
+                if (i[0])
+                    out.push(i)
+            return  out
+            }
+                    
+
+        
+        catch (err) {
+            console.error(err)
+        }
     }
 
 }
-export const  tag = async (text: string) => {
-        const ac = new AhoCorasick();
-        let res : Map<number, string[][]> = new Map();
-        try {
-            const data = fs.readFileSync(path.join(process.cwd() + '/dic.csv'))
-            const pd = data.toString().split('\n');
-            for (let i of pd) {
-                let word = i.slice(0, -1).split(',');
-                ac.insert(word);
-            }
-            res = ac.search(text);
-
-            const result : Map<number, string[]> = new Map();
-            for (let [i, x] of res.entries()) {
-                const resultArray = x[x.length - 1] || [];
-                result.set(i, resultArray);
-            }
-       
-            let idx = 0
-            let key = 0
-            let ret : Map<number, string[]> = new Map();
-            let keys = Array.from(result.keys());
-            for (let s of text)
-            {
-                if (idx >= text.length) break;
-                key = keys[idx];
-                const resv = result.get(idx) || []
-                if (resv.length == 0) {
-                    if (text[idx] != ' ') {
-                        ret.set(idx, [text[idx], 'UNK']);
-                    }
-                    idx++;
-                } else {
-                    ret.set(idx, resv);
-                    idx += resv[0].length;
-                }
-            }
-                
-            return Array.from(ret.values());
-        } catch (err) {
-            console.error(err);
-        }
-    }
+export {Pos}
