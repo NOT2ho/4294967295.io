@@ -5,14 +5,14 @@ import { headers } from 'next/headers'
 
 async function ipconfig() {
     const FALLBACK_IP_ADDRESS = '0.0.0.0'
-    const forwardedFor = headers().get('x-forwarded-for')
+    const forwardedFor = (await headers()).get('x-forwarded-for')
 
     if (forwardedFor) {
         //console.log(forwardedFor)
         return forwardedFor.split(',')[0] ?? FALLBACK_IP_ADDRESS
     }
 
-    return headers().get('x-real-ip') ?? FALLBACK_IP_ADDRESS
+    return (await headers()).get('x-real-ip') ?? FALLBACK_IP_ADDRESS
 }
 //console.log(ipconfig())
 
