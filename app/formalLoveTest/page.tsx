@@ -9,7 +9,7 @@ import styles from './style.module.css'
 import dynamic from 'next/dynamic'
 
 
-export default function formalLoveTest() {
+export default function FormalLoveTest() {
     const [val, setVal] = React.useState('');
     const [hide, setHide] = React.useState(false);
 
