@@ -65,8 +65,9 @@ export default function FormalLoveTest() {
 
         switch (urban) {
             
-            case "61" : region = no2[Math.floor(Math.random() * 43)]
             case "60" : region = kyongki[Math.floor(Math.random() * 30)]
+            case "61" : region = no2[Math.floor(Math.random() * 43)]
+
         }
 
         switch (danger) {
@@ -82,7 +83,7 @@ export default function FormalLoveTest() {
             case "70" : colour ="지하 실험실"
             case "71" : colour = "가상감정연구소"
         }
-
+        console.log(region!)
         const res = name + "님은 " +  otaku! + " "+ anime 
             + "의 2차 창작물들을 즐기는 일상을 보낸다.\n오타쿠 행위를 할 돈이 다 떨어지자 " + name + "씨는 복제인간 생산 회사인 녹색물산에 입사하기로 한다.\n"
             + name +  "의 집이 위치한 " +  region! + "에서 회사가 있는 남양주시 별내면으로 출퇴근하길 얼마나 지났을까.. \n"
@@ -108,11 +109,11 @@ export default function FormalLoveTest() {
                         <label className="font-['Pretendard-Regular'] block text-m font-medium text-gray-700">1. 당신의 이름은 무엇입니까?</label>
                         <input className='class="border-2 border-gray-300 p-1 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"' type="text" name= "no1" placeholder="이름 또는 별명 입력" required /></div>
                     <div className="mb-4">
-                        <label className="font-['Pretendard-Regular'] block text-m font-medium text-gray-700">2. 재미를 위해 어디까지 내어 줄 수 있습니까?</label>
-                        <input className="border-2 border-gray-300 p-1 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" type="text" name= "no2" placeholder="단어 입력" required/></div>
+                        <label className="font-['Pretendard-Regular'] block text-m font-medium text-gray-700">2. 재미를 위해 어떤 대가까지 지불할 수 있습니까?</label>
+                        <input className="border-2 border-gray-300 p-1 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" type="text" name= "no2" placeholder="단어 입력(예시: 1000원, 새끼손가락)" required/></div>
                     <div className="mb-4">
                         <label className="font-['Pretendard-Regular'] block text-m font-medium text-gray-700">3. 그렇다면, 사랑을 위해서는 어디까지 내어 줄 수 있습니까? </label>
-                        <input className="border-2 border-gray-300 p-1 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" type="text" name="no3" placeholder="단어 입력" required/></div>
+                        <input className="border-2 border-gray-300 p-1 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" type="text" name="no3" placeholder="단어 입력(예시: 소중한 기억, 일상)" required/></div>
                     <div className="mb-4"> 
                         <label className="font-['Pretendard-Regular'] block text-m font-medium text-gray-700">4. 스스로 아름답다고 생각하십니까? </label>
                         <input type="radio" className="w-3 h-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" id="1" name="no4" value="1"/><label className="font-['Pretendard-Regular'] text-sm font-medium text-gray-700" htmlFor="1"> 아니, 전혀</label> <br></br>
