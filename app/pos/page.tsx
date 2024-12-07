@@ -61,20 +61,22 @@ export default function PosTag() {
 
 
     return (
-        
+        <div className="bg-slate-50 min-h-screen flex items-center justify-center">
         <form action={FormSubmit}  >
             <h1>한국어 형태소 분석기(허접)</h1>
-            <h2><a href='https://www.npmjs.com/package/notpos_kr'>npm   (no dependency)</a></h2>
+            <h2><a href='https://www.npmjs.com/package/notpos_kr'>npm (no dependency)</a></h2>
             <h3>아직 불완전합니다. 개선하고 싶으시다면 PR를 보내 주세요(진짜임)</h3>
-            <>문장을 입력하고 쪼개기를 누르세요. 형태소 태그는 mecab_ko_dic의 것과 동일합니다.</>
+            <div >문장을 입력하고 쪼개기를 누르세요. 형태소 태그는 mecab_ko_dic의 것과 동일합니다.</div>
                 
             
             <p>
-                <textarea name="body" placeholder="string."></textarea>
+                <textarea className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="body" placeholder="string."></textarea>
             </p>
-            <p><input type="submit" value="쪼개기" />
-            </p>{hide ? <p>{val}</p> : <p></p>}
+            <div className='flex justify-center items-center h-full'>
+            <p><br></br><input className="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="submit" value="쪼개기" />
+            </p></div>{hide ? <p>{val}</p> : <p></p>}
         </form >
+        </div>
     )
 
 }
